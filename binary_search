@@ -41,3 +41,8 @@ print('OTVET',binary_search(my_list, 3))
 #print('OTVET',binary_search(my_list,-1))
 
 print("--- %s seconds ---" % (time.time() - start_time))
+
+
+print('THIS IS POWER OF GIT')
+
+print('THIS IS POWER OF GIT')
