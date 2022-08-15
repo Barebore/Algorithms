@@ -5,9 +5,6 @@ def findSmallest(arr):
         if arr[i] < smallest:
             smallest = arr[i]
             smallest_index = i
-            print('cycle #',i)
-            print(arr)
-            print(smallest,smallest_index)
     return smallest_index
 
 def selectionSort(arr):
