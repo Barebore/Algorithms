@@ -1,27 +1,27 @@
-def gen_bin(M, prefix = ''):
-    if M == 0:
-        print(prefix)
-        return
-    for digit in '0','1':
-        gen_bin(M-1,prefix + digit)
-#    gen_bin(M-1, prefix+'0')
- #   gen_bin(M-1, prefix+'1')
-
-def generate_numbers(N: int, M: int, prefix=None):
-    ''' Генерирует все числа (с лидирующими незначащими нулями
-        в N-ричной системе счисления (N <= 10)
-        длины М
+def find(number,A):
+    '''ищет х в А и вовзращает True, если такой есть
+        False, если такого нет
     '''
-    prefix = prefix or []
-    print(prefix)
+    for x in A:
+        if number == x:
+            return True
+    return False
+
+def generate_permutations(N:int, M:int=-1, prefix = None):
+    ''' Генерация всех перестановок N чисел в М позициях,
+        с префиксом prefix
+    '''
+    M = N if M == -1 else M # по умолчанию N чисел в N позициях
+    prefix = prefix or [prefix]
     if M == 0:
         print(prefix)
         return
-    for digit in range(N):
-        prefix.append(digit)
-        generate_numbers(N, M-1, prefix)
+    for number in range(1,N+1):
+        if find(number,prefix): 
+            continue
+        prefix.append(number)
+        generate_permutations(N, M-1, prefix)
         prefix.pop
-    
 
-gen_bin(3)
-#generate_numbers(4,3)
+
+generate_permutations(3)
