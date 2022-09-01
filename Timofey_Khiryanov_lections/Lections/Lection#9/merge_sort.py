@@ -40,6 +40,3 @@ def merge_sort(A):
 A = [1,2,3,4,5,6]
 merge_sort(A)
 print(*A)
-
-for x in A:
-    print(x)
