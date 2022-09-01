@@ -1,3 +1,6 @@
+from sys import float_repr_style
+
+
 def merge(A:list, B:list):
     i = k = n = 0
     C = [0] * (len(A)+len(B))
@@ -37,3 +40,6 @@ def merge_sort(A):
 A = [1,2,3,4,5,6]
 merge_sort(A)
 print(*A)
+
+for x in A:
+    print(x)
