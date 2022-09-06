@@ -15,15 +15,15 @@ def number_profit_day(day,price):
     print('')
     profit = 0
     day1 = 0
-    day2 = 0
+    day2 = 1
     for i in range(day-1):
-        print(day1,day2,'if', price[i+1],'-' ,price[day1],'>',profit)
-        if price[i+1] - price[day1] > profit:
-            profit = price[i+1] - price[i]
+        print(day1,day2,'if', price[day2],'-' ,price[i],'>',profit)
+        if price[day2] - price[i] > profit:
+            profit = price[day2] - price[i]
             day1 = i
             day2 = i+1
         else:
-            day1 +=1
+            day2 +=1
     print(day1+1,day2+1)
     return day1+1,day2+1
 
