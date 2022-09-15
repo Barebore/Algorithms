@@ -1,4 +1,4 @@
 a = input()
 a = a.replace(' ','\"')
-с = a.find("\"")
+c = a.find("\"")
 print(c)
