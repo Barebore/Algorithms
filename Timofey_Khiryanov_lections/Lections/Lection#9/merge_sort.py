@@ -36,7 +36,9 @@ def merge_sort(A):
     C = merge(L,R)
     for i in range(len(A)):
         A[i] = C[i]
+    return C
 
-A = [1,2,3,4,5,6]
+A = [1,2,3,4,5,6,5,4,3,2]
 merge_sort(A)
 print(*A)
+print(merge_sort(A))
