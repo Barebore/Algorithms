@@ -24,3 +24,5 @@ n = input().split()
 d = dict( [(x[:2], [i for i in n if x[:2] == i[:2]]) for x in n] )
 print(*sorted(d.items()))
 #########
+
+d = dict( [(x[:2], [i for i in n if x[:2] == i[:2]]) for x in n] )
