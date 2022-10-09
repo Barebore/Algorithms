@@ -3,4 +3,5 @@ def get_list():
         yield x
 
 a = get_list()
-print(a)
+for x in a:
+    print(x)
