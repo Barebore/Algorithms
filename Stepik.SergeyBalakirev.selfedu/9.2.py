@@ -1,7 +1,9 @@
-def get_list():
-    for x in [1,2,3,4]:
-        yield x
+# ввод значения N (эту переменную не менять)
+N = int(input())
 
-a = get_list()
-for x in a:
-    print(x)
+# здесь продолжайте программу
+def get_sum(n):
+    for i in range(1,n+2):
+        yield sum(range(i))
+for i in get_sum(N):
+    print(i)
