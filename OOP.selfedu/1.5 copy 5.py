@@ -15,6 +15,11 @@ class ListObject:
     def link(self, obj):
         self.next_obj = obj
 
-head_obj = ListObject(lst_in[0])
-for i in range(1, len(lst_in)-1,2):
-    ListObject(lst_in[i],lst_in[i+1])
+lst = []
+for i in lst_in:
+    lst.append(ListObject(i))
+
+for i in range(len(lst)-1):
+    lst[i].link(lst[i+1])
+
+head_obj = lst[0]
