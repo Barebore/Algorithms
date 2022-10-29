@@ -1,1 +1,2 @@
-123123
+class Main:
+    pass
