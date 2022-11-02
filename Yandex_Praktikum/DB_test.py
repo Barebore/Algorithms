@@ -4,11 +4,19 @@ con = sqlite3.connect('db.sqlite')
 
 cur = con.cursor()
 
-cur.executescript('''
+cur.execute('''
+-- Верни все поля
 SELECT *
-FROM sqlite_master 
+-- из таблицы movies
+FROM movies
+-- ...но перед этим присоедини таблицу slogans так, чтобы в записях
+-- совпадали значения полей movies.slogan_id и slogans.id
+JOIN slogans ON movies.slogan_id = slogans.id; 
 ''')
-for i in cur:
-    print(i)
+i = 0
+for value in cur:
+    i += 1
+    print(i, value)
 con.commit()
 con.close()
+
