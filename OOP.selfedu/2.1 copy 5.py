@@ -1,14 +1,42 @@
 class Point:
     def __init__(self, *args):
         self.set_coord(*args)
+
     def set_coord(self, *args):
         self.__x, self.__y = args
-    def get_coord(self):
+
+    def get_coords(self):
         return self.__x, self.__y
+
 class Rectangle:
-    pass
+    def __init__(self, *args):
+        if isinstance(args[0], Point):
+            self.set_coords(*args)
+        else:
+            self.__sp, self.__ep = Point(args[0], args[1]), Point(args[2], args[3])
 
+    def set_coords(self, *args):
+        self.__sp, self.__ep = args
 
+    
+    def get_coords(self):
+        return self.__sp, self.__ep
+    
+    def draw(self):
+        print(f"Прямоугольник с координатами: ({self.__sp}) ({self.__ep})")
+
+    
+#r1 = Rectangle(Point(1, 2), Point(3, 4))
+#r2 = Rectangle(1, 2, 3, 4)
+rect = Rectangle(0,0,20,34)
+rect.draw()
+
+r = Rectangle(1, 2.6, 3.3, 4)
+r.set_coords(Point(1, 2), Point(3, 4))
+sp, ep = r.get_coords()
+print(sp, ep)
+a, b = sp.get_coords()
+# c, d = ep.get_coords()
 '''Подвиг 8. Объявите в программе два класса Point и Rectangle. Объекты первого класса должны создаваться командой:
 pt = Point(x, y)
 где x, y - координаты точки на плоскости (целые или вещественные числа). При этом в объектах класса Point должны формироваться следующие локальные свойства:
