@@ -15,9 +15,9 @@ class StackObj:
         return self.__next
     
     @next.setter
-    def next(self, next):
-        #if next == None: #or isinstance(next, StackObj):
-        self.__next = next
+    def next(self, obj):
+        if obj is None or isinstance(obj, StackObj):
+            self.__next = obj
 
 class Stack:
 
