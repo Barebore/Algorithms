@@ -21,7 +21,7 @@ class StackObj:
 
 class Stack:
 
-    def __init__(self) -> None:
+    def __init__(self) -> None: 
         self.top = None
 
     def push(self,obj):
