@@ -27,7 +27,7 @@ class RadiusVector2D:
     
     @y.setter
     def y(self, y):
-        if (type(y) == float or type(y) == int) and self.MIN_COORD <= x <= self.MAX_COORD:
+        if (type(y) == float or type(y) == int) and self.MIN_COORD <= y <= self.MAX_COORD:
             self.__y = y
 
     @staticmethod
