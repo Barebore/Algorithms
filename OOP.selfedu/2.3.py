@@ -1,4 +1,5 @@
-input numpy as np
+import numpy as np
+
 
 class FloatValue:
 
@@ -26,14 +27,17 @@ class Cell:
 
 class TableSheet:
 
-    def __init__(self, n, m):
-        self.cells = ([[Cell(i) for _ in range(n)] for _ in range(m)] for i in range(1.0, 15.0, 1.0))
+    def __init__(self, n, m, start = 0, stop = 0):
+        if start != 0 and stop != 0:
+            i = iter(range(start, stop+1, 1))
+            self.cells = [[Cell(float(next((i)))) for _ in range(m)] for _ in range(n)]
+        else:
+            self.cells = [[Cell(0.0) for _ in range(n)] for _ in range(m)]
+table = TableSheet(5, 3, 1, 15)
 
-table = TableSheet(5,3)
-
-for i in table.cells:
-    print(i.value)
-
+# for i in table.cells:
+#     print(i.value)
+print(table.cells[4][2].value)
 
 ''' Подвиг 6. Объявите дескриптор данных FloatValue, который бы устанавливал и возвращал вещественные значения. При записи вещественного
 числа должна выполняться проверка на вещественный тип данных. Если проверка не проходит, то генерировать исключение командой:
