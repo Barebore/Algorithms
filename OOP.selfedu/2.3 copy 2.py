@@ -1,76 +1,70 @@
-class ValidateString:
-    def __init__(self, min_length = 3, max_length = 100):
-        self.min_lenght = min_length
-        self.max_length = max_length
-
-    def validate(self, string):
-        if type(string) == str and self.max_length >= len(string) >= self.min_lenght:
-            return True
-        return False
-
 class StringValue:
-
-    def __init__(self, validator):
-        self.validator = validator
-
+    def __init__(self, min_length = 2, max_length = 50):
+        self.min_length = min_length
+        self.max_length = max_length
+    
     def __set_name__(self, owner, name):
-        self.name = '_'+name
+        self.name = '_' + name
 
     def __get__(self, instance, owner):
         return getattr(instance, self.name)
 
     def __set__(self, instance, value):
-        if self.validator.validate(value):
+        if type(value) == str and self.max_length >= len(value) >= self.min_length:
+            setattr(instance, self.name, value)
+    
+
+class PriceValue:
+    def __init__(self, max_value = 100):
+        self.max_value = max_value
+    
+    def __set_name__(self, owner, name):
+        self.name = '_' + name
+
+    def __get__(self, instance, owner):
+        return getattr(instance, self.name)
+
+    def __set__(self, instance, value):
+        if (type(value) == int or type(value) == float) and self.max_value >= value >= 0:
             setattr(instance, self.name, value)
 
-class RegisterForm:
-    login = StringValue(validator = ValidateString())
-    password = StringValue(validator = ValidateString())
-    email = StringValue(validator = ValidateString())
 
-    def __init__(self, login, password, email):
-        self.login = login
-        self.password = password
-        self.email = email
-    
-    def get_fields(self):
-        a = []
-        a.append(self.login)
-        a.append(self.password)
-        a.append(self.email)
-        return a
+class SuperShop:
+    def __init__(self, name):
+        self.name = name
+        self.goods = []
 
-    def show(self):
-        print('<form>')
-        print(f'Логин:{self.login}')
-        print(f'Пароль:{self.password}')
-        print(f'Email:{self.email}')
-        print('<form>')
+    def add_product(self, product):
+        self.goods.append(product)
+        
+    def remove_product(self, product):
+        del self.goods[self.goods.index(product)]
 
-assert hasattr(ValidateString, 'validate'), "в классе ValidateString отсутствует метод validate"
-r = RegisterForm('11111', '1111111', '11111111')
-assert hasattr(r,'login') and hasattr(r, 'password') and hasattr(r, 'email'), "в классе RegisterForm должны быть дескрипторы login, password, email"
-assert hasattr(RegisterForm, 'show'), "в классе RegisterForm отсутствует метод show"
-StringValue.__doc__
-frm = RegisterForm("123", "2345", "sc_lib@list.ru")
-assert frm.get_fields() == ["123", "2345", "sc_lib@list.ru"], "метод get_fields вернул неверные данные"
-frm.login = "root"
-assert frm.login == "root", "дескриптор login вернул неверные данные"
-v = ValidateString(5, 10)
-assert v.validate("hello"), "метод validate вернул неверное значение"
-assert v.validate("hell") == False, "метод validate вернул неверное значение"
-assert v.validate("hello world!") == False, "метод validate вернул неверное значение"
+class Product():
+    name = StringValue()
+    price = PriceValue()
 
-class A:
-    st = StringValue(validator=ValidateString(3, 10))
+    def __init__(self, name, price) -> None:
+        self.price = price
+        self.name = name
 
-a = A()
-a.st = "hello"
-assert a.st == "hello", "дескриптор StringValue вернул неверное значение"
-a.st = "d"
 
-assert a.st == "hello", "дескриптор StringValue сохранил строку длиной меньше min_length"
-a.st = "dапарпаропропропропр"
-assert a.st == "hello", "дескриптор StringValue сохранил строку длиной больше max_length"
-a.st = "dапарпароп"
-assert a.st == "dапарпароп", "дескриптор StringValue сохранил строку длиной больше max_length"
+shop = SuperShop("У Балакирева")
+shop.add_product(Product("name", 100))
+shop.add_product(Product("name", 100))
+assert shop.name == "У Балакирева", "атрибут name объекта класса SuperShop содержит некорректное значение"
+
+for p in shop.goods:
+    # print(p.__dict__)
+    assert p.price == 100, "дескриптор price вернул неверное значение"
+    assert p.name == "name", "дескриптор name вернул неверное значение"
+t = Product("name 123", 1000)
+shop.add_product(t)
+shop.remove_product(t)
+assert len(shop.goods) == 2, "неверное количество товаров: возможно некорректно работают методы add_product и remove_product"
+assert hasattr(shop.goods[0], 'name') and hasattr(shop.goods[0], 'price')
+t = Product(1000, "name 123")
+if hasattr(t, '_name'):
+    assert type(t.name) == str, "типы поля name должнен быть str"
+if hasattr(t, '_price'):
+    assert type(t.price) in (int, float), "тип поля price должнен быть int или float"
