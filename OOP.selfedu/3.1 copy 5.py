@@ -1,34 +1,62 @@
-class SmartPhone:
-    def __init__(self, model):
-       self.model = model
-       self.apps = []
+class Circle:
+    def __init__(self, x, y, radius):
+        self.x = x
+        self.y = y
+        self.radius = radius
 
-    def add_app(self, app):
-        for i in self.apps:
-            if app.name == i.name:
-                return
-        self.apps.append(app)
+    def __getattr__(self, item):
+        return False
 
-    def remove_app(self, app):
-        del self.apps[self.apps.index(app)]
+    @property
+    def x(self):
+        return self.__x
+    @x.setter
+    def x(self, value):
+        Circle.check_value(value)
+        self.__x = value
 
-class AppVK:
-    def __init__(self, name = 'Вконтакте'):
-        self.name = name
-
-class AppYouTube:
-    def __init__(self, memory_max,name = 'Youtube'):
-        self.name = name
-        self.memory_max = memory_max
-
-class AppPhone:
-    def __init__(self, phone_list, name = 'Phone'):
-        self.name = name
-        self.phone_list = phone_list
+    @property
+    def y(self):
+        return self.__y
+    @y.setter
+    def y(self, value):
+        Circle.check_value(value)
+        self.__y = value
     
-sm = SmartPhone("Honor 1.0")
-sm.add_app(AppVK())
-sm.add_app(AppVK())  # второй раз добавляться не должно
-sm.add_app(AppYouTube(2048))
-for a in sm.apps:
-    print(a.name)
+    @property
+    def radius(self):
+        return self.__radius
+    @radius.setter
+    def radius(self, value):
+        Circle.check_value(value)
+        if value > 0:
+            self.__radius = value
+
+    @classmethod
+    def check_value(cls, value):
+        if type(value) in (float, int):
+            return value
+        raise TypeError('Неверный тип присваеваемых данных.')
+
+
+assert type(Circle.x) == property and type(Circle.y) == property and type(Circle.radius) == property, "в классе Circle должны быть объявлены объекты-свойства x, y и radius"
+try:
+    cr = Circle(20, '7', 22)
+except TypeError:
+    assert True
+else:
+    assert False, "не сгенерировалось исключение TypeError при инициализации объекта с недопустимыми аргументами"
+cr = Circle(20, 7, 22)
+assert cr.x == 20 and cr.y == 7 and cr.radius == 22, "объекты-свойства x, y и radius вернули неверные значения"
+cr.radius = -10 # прежнее значение не должно меняться, т.к. отрицательный радиус недопустим
+assert cr.radius == 22, "при присваивании некорректного значения, прежнее значение изменилось"
+x, y = cr.x, cr.y
+assert x == 20 and y == 7, "объекты-свойства x, y вернули некорректные значения"
+assert cr.name == False, "при обращении к несуществующему атрибуту должно возвращаться значение False"
+try:
+    cr.x = '20'
+except TypeError:
+    assert True
+else:
+    assert False, "не сгенерировалось исключение TypeError"
+    
