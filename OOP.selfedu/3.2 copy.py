@@ -1,37 +1,28 @@
-import random
+class ImageFileAcceptor:
+    def __init__(self, extensions):
+        self.extensions = extensions
 
-class RandomPassword:
-    def __init__(self, psw_chars, min_lenght, max_lenght):
-        self.psw_chars = psw_chars
-        self.min_lenght = min_lenght
-        self.max_lenght = max_lenght
-    
-    def __call__(self):
-        psw = ''
-        random_lenght = random.randint(self.min_lenght, self.max_lenght)
-        for i in range(random_lenght):
-            psw += random.choice(self.psw_chars)
-        return psw 
+    def __call__(self, *args, **kwargs):
+        for i in args:
+            if i.rsplit('.')[-1] in self.extensions:
+                return True
+            return False
 
-min_lenght = 5
-max_lenght = 20
-psw_chars = "qwertyuiopasdfghjklzxcvbnm0123456789!@#$%&*"
-rnd = RandomPassword(psw_chars, min_lenght, max_lenght)
-psw = rnd()
-lst_pass = [rnd() for i in range(3)]
-print(lst_pass)
+    def __setattr__(self, key, value):
+        object.__setattr__(self, key, value)
+        
+        
 
 
-'''Подвиг 2. Объявите класс RandomPassword для генерации случайных паролей. Объекты этого класса должны создаваться командой:
-rnd = RandomPassword(psw_chars, min_length, max_length)
-где psw_chars - строка из разрешенных в пароле символов; min_length, max_length - минимальная и максимальная длина генерируемых паролей.
-Непосредственная генерация одного пароля должна выполняться командой:
-psw = rnd()
-где psw - ссылка на строку длиной в диапазоне [min_length; max_length] из случайно выбранных символов строки psw_chars.
-С помощью генератора списка (list comprehension) создайте список lst_pass из трех сгенерированных паролей объектом rnd класса 
-RandomPassword, созданного с параметрами: 
-min_length = 5
-max_length = 20
-psw_chars = "qwertyuiopasdfghjklzxcvbnm0123456789!@#$%&*"
-P.S. Выводить на экран ничего не нужно, только создать список из паролей.
-P.P.S. Дополнительное домашнее задание: попробуйте реализовать этот же функционал с использованием замыканий функций.'''
+filenames = ["boat.jpg", "web.png", "text.txt", "python.doc", "ava.8.jpg", "forest.jpeg",
+             "eq_1.png", "eq_2.png", "my.html", "data.shtml"]
+
+fs = ["boat.jpg", "web.png", "text.txt", "python.doc", "ava.8.jpg", "forest.jpeg", "eq_1.png", "eq_2.png", "my.html", "data.shtml"]
+acceptor = ImageFileAcceptor(("jpg", "png"))
+res = filter(acceptor, fs)
+assert set(res) == set(["boat.jpg", "web.png", "ava.8.jpg", "eq_1.png", "eq_2.png"]), "с помощью объекта класса ImageFileAcceptor был сформирован неверный список файлов"
+acceptor = ImageFileAcceptor(("jpeg", "html"))
+res = filter(acceptor, fs)
+print(acceptor.extensions)
+print(set(res))
+# assert set(res) == set(["forest.jpeg", "my.html"]), "с помощью объекта класса ImageFileAcceptor был сформирован неверный список файлов"

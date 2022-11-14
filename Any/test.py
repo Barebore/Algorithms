@@ -1,3 +1,2 @@
-d_1 = 0
-d_2 = 0
-print('YES' if d_1 == d_2 else 'NO')
+s1 = '123.456.789'
+print(s1.rsplit('.')[-1])
