@@ -2,8 +2,8 @@
 # departaments = input()
 # colors_char = input()
 
-departaments = 'Tinkoff'
-colors_char = 'BYBYBYB'
+departaments = input()
+colors_char = input()
 def cout_ugly_words(departaments, colors_char):
     departaments_list = list(departaments.split()) # даелам список слов
     color_index = 0 # индекс символа в строке с цветами
@@ -19,6 +19,8 @@ def cout_ugly_words(departaments, colors_char):
         color_index +=1
         ugly_words += flag
     return ugly_words
+
+print(cout_ugly_words(departaments, colors_char))
 
 assert cout_ugly_words('Tinkoff', 'BYBYBYB') == 0, 'Fail'
 #print(cout_ugly_words('Tinkoff', 'BYBYBYB00'))
