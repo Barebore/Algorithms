@@ -67,6 +67,6 @@ def task6(n):
                     max_value = highest_one_bit(max_result) * 2 - 1
         if result == max_value:
             max_flag = True
-        print(max_result, number_set)
+        print(max_result)
 n = int(input())
 task6(n)

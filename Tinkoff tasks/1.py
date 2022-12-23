@@ -1,7 +1,7 @@
 # char_amount = int(input())
 # departaments = input()
 # colors_char = input()
-
+lenght = int(input())
 departaments = input()
 colors_char = input()
 def cout_ugly_words(departaments, colors_char):
@@ -22,10 +22,10 @@ def cout_ugly_words(departaments, colors_char):
 
 print(cout_ugly_words(departaments, colors_char))
 
-assert cout_ugly_words('Tinkoff', 'BYBYBYB') == 0, 'Fail'
-#print(cout_ugly_words('Tinkoff', 'BYBYBYB00'))
-assert cout_ugly_words('Algorithms and Data Structures', 'BBBBBBBBBBBYBYYYYBBBBBBBBBB') == 3, 'Fail'
-#print(cout_ugly_words('Algorithms and Data Structures', 'BBBBBBBBBBBYBYYYYBBBBBBBBBB'))
-assert cout_ugly_words('Tinkoff', 'BBBBBBB') == 1, 'Fail'
-assert cout_ugly_words('Prostoslovo', 'BYBYBYBYBYY') == 1, 'Fail'
-assert cout_ugly_words('Tinkoff', 'BYBYBYB') == 0, 'Fail'
+# assert cout_ugly_words('Tinkoff', 'BYBYBYB') == 0, 'Fail'
+# #print(cout_ugly_words('Tinkoff', 'BYBYBYB00'))
+# assert cout_ugly_words('Algorithms and Data Structures', 'BBBBBBBBBBBYBYYYYBBBBBBBBBB') == 3, 'Fail'
+# #print(cout_ugly_words('Algorithms and Data Structures', 'BBBBBBBBBBBYBYYYYBBBBBBBBBB'))
+# assert cout_ugly_words('Tinkoff', 'BBBBBBB') == 1, 'Fail'
+# assert cout_ugly_words('Prostoslovo', 'BYBYBYBYBYY') == 1, 'Fail'
+# assert cout_ugly_words('Tinkoff', 'BYBYBYB') == 0, 'Fail'
