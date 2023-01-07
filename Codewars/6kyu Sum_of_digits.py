@@ -4,8 +4,8 @@ def func(x):
            return n
         return (n % 10) + digital_root(n // 10)
 
-    while x > 10:
+    while x > 9:
         x = digital_root(x)
     return x
 
-print(func(942))
+print(func(71332156))
