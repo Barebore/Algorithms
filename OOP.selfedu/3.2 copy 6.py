@@ -6,25 +6,14 @@ class HandlerGET:
         return self.get(self.__fn, *args, **kwargs)
 
     def get(self, func, request, *args, **kwargs):
-        if request == {}:
-            return 'GET: ' + func(request)
-        if request:
-            #print(request)
-            if request is None or request['method']=='GET':
-                return f'{request["method"]}: {func(request)}'
-            return None
-        return None
+        pass
 
-@HandlerGET
-def index(request):
+    def post(self, func, request, *args, **kwargs):
+        pass
+
+@HandlerGET(methods=('GET', 'POST'))
+def contact(request):
     return "главная страница сайта"
-res = index({"method": "GET"})
-assert res == "GET: главная страница сайта", "декорированная функция вернула неверные данные"
-res = index({"method": "POST"})
-#print(res)
-assert res is None, "декорированная функция вернула неверные данные"
-res = index({"method": "POST2"})
-assert res is None, "декорированная функция вернула неверные данные"
-res = index({})
-print(res)
-assert res == "GET: главная страница сайта", "декорированная функция вернула неверные данные"
+
+
+res = contact({"method": "POST", "url": "contact.html"})
