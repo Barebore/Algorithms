@@ -1,6 +1,10 @@
+from pprint import pprint
+
 import requests
 
-response = requests.get('https://swapi.dev/api/starships/9/')
-response = response.text
-print(response)
-print(type(response))
+# Ваш код здесь.
+params = {'name':'luke', }
+response = requests.get('https://swapi.dev/api/people/', params=params)
+characters = response.json()
+response = requests.get(characters['results'][0]['homeworld'])
+print(response.json()['diameter'])
