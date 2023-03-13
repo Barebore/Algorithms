@@ -1,4 +1,4 @@
-def sieve_of_eratosthenes(n):
+def resheto_eratosfena(n):
     primes = [True] * (n + 1)
     primes[0] = primes[1] = False
     
@@ -8,3 +8,7 @@ def sieve_of_eratosthenes(n):
                 primes[j] = False
     
     return [i for i in range(2, n + 1) if primes[i]]
+
+n = int(input())
+
+print(resheto_eratosfena(n))
