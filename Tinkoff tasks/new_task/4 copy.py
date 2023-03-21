@@ -61,16 +61,16 @@ def boring_check(a: list):
     return left
 
 
-if __name__ == '__main__':
-    doctest.testmod()
+# if __name__ == '__main__':
+#     doctest.testmod()
 
-length_set = int(input())
-numbers_set = list(input())
-# numbers_set = [1, 2, 3, 1, 2, 2, 3, 3, 3, 1, 4, 4, 5]
-# print(boring_check(numbers_set))
-# numbers_set = [1, 2, 4, 2, 3, 1, 3, 9, 15, 23]
-# print(boring_check(numbers_set))
-# numbers_set = [1, 2, 3, 4, 5]
-# print(boring_check(numbers_set))
+# length_set = int(input())
+# numbers_set = list(input())
+numbers_set = [1, 2, 3, 1, 2, 2, 3, 3, 3, 1, 4, 4, 5]
+print(boring_check(numbers_set))
+numbers_set = [1, 2, 4, 2, 3, 1, 3, 9, 15, 23]
+print(boring_check(numbers_set))
+numbers_set = [1, 2, 3, 4, 5]
+print(boring_check(numbers_set))
 
 

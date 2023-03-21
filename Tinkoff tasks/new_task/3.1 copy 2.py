@@ -1,17 +1,4 @@
-import doctest
-
-
 def find_short_good_string(n, s):
-    '''
-    >>> find_short_good_string(12, 'aabbccddbadd')
-    5
-    >>> find_short_good_string(16, 'aaaabbbbccccdddd')
-    10
-    >>> find_short_good_string(7, 'dbbccca')
-    7
-    >>> find_short_good_string(7, 'abcabac')
-    -1
-    '''
 # Инициализация переменных-счетчиков
     count_a, count_b, count_c, count_d = 0, 0, 0, 0
     left, right = 0, 0
@@ -50,9 +37,6 @@ def find_short_good_string(n, s):
     else:
         return min_length
 
-
-if __name__ == '__main__':
-    doctest.testmod()
 
 n = int(input())
 s = input()
