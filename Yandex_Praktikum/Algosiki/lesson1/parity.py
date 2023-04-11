@@ -1,0 +1,6 @@
+lst = list(map(int, input().split()))
+print(all(value % 2 == 1 for value in lst))
+print(2 // 2)
+print(all(value // 2 == 0 for value in lst))
+logic = all(value % 2 == 1 for value in lst) or all(value % 2 == 0 for value in lst)
+print('WIN' if logic else 'FAIL')
