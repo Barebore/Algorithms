@@ -1,1 +1,3 @@
-print(13//5)
+a = 3
+b = 'a'
+print(a + b)
