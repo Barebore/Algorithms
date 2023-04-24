@@ -49,9 +49,7 @@ k = int(input())
 queue = Deque(k)
 for i in range(n):
     command = input()
-    if command == 'peek':
-        queue.peek()
-    elif command == 'pop_back':
+    if command == 'pop_back':
         queue.pop_back()
     elif command == 'pop_front':
         queue.pop_front()
