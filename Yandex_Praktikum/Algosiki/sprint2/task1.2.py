@@ -1,48 +1,51 @@
-# 86334548 
+# 86380716 
 class Deque:
     def __init__(self, n):
         self.__queue = [None] * n
         self.__head = 0
         self.__tail = 0
-        self.max_size = n
-        self.size = 0
+        self.__max_size = n
+        self.__size = 0
+
+    def is_full(self):
+        return self.__size == self.__max_size
     
     def is_empty(self):
-        return self.size == 0
+        return self.__size == 0
 
     def push_back(self, value):
-        if self.size == self.max_size:
+        if self.is_full():
             print('error')
             return
         self.__queue[self.__tail] = value
-        self.__tail = (self.__tail + 1) % self.max_size
-        self.size += 1
+        self.__tail = (self.__tail + 1) % self.__max_size
+        self.__size += 1
 
     def push_front(self, value):
-        if self.size == self.max_size:
+        if self.is_full():
             print('error')
             return
         self.__queue[self.__head - 1] = value
-        self.__head = (self.__head - 1) % self.max_size
-        self.size += 1
+        self.__head = (self.__head - 1) % self.__max_size
+        self.__size += 1
     
     def pop_front(self):
-        if self.size == 0:
+        if self.is_empty():
             print('error')
             return
         print(self.__queue[self.__head])
         self.__queue[self.__head] = None
-        self.__head = (self.__head + 1) % self.max_size
-        self.size -= 1
+        self.__head = (self.__head + 1) % self.__max_size
+        self.__size -= 1
 
     def pop_back(self):
-        if self.size == 0:
+        if self.is_empty():
             print('error')
             return
         print(self.__queue[self.__tail - 1])
         self.__queue[self.__tail - 1] = None
-        self.__tail = (self.__tail - 1) % self.max_size
-        self.size -= 1
+        self.__tail = (self.__tail - 1) % self.__max_size
+        self.__size -= 1
 
 if __name__ == "__main__":
     command_count = int(input())

@@ -1,4 +1,4 @@
-# 86233158
+#86380771
 class Stack:
     def __init__(self):
         self.__stack = []
@@ -14,18 +14,39 @@ class Stack:
     def is_empty(self):
         return len(self.__stack) == 0
     
+    def add(self):
+        temp1 = self.pop()
+        temp2 = self.pop()
+        self.push(temp2 + temp1)
+
+    def subtract(self):
+        temp1 = self.pop()
+        temp2 = self.pop()
+        self.push(temp2 - temp1)
+
+    def multiply(self):
+        temp1 = self.pop()
+        temp2 = self.pop()
+        self.push(temp2 * temp1)
+
+    def divide(self):
+        temp1 = self.pop()
+        temp2 = self.pop()
+        self.push(temp2 // temp1)
+
+
 if __name__ == "__main__":
     st = Stack()
     input_string = list(input().split())
     commands = {
-        '+': '''st.push(st.pop() + st.pop())''',
-        '-': '''temp1 = st.pop(); temp2 = st.pop(); st.push(temp2 - temp1);''',
-        '*': '''st.push(st.pop() * st.pop())''',
-        '/': '''temp1 = st.pop();temp2 = st.pop();st.push(temp2 // temp1);''',
+        '+': st.add,
+        '-': st.subtract,
+        '*': st.multiply,
+        '/': st.divide,
     }
     for value in input_string:
         if value in commands.keys():
-            exec(commands[value])
+            commands[value]()
         else:
             st.push(int(value))
     print(st.pop())
