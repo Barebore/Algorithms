@@ -1,21 +1,15 @@
 # Method Resoilution Order (MRO)
 
-class A:
-    num = 10
+class Goods:
+    def __init__(self, name, weight, price):
+        print('init MixinLog')
+        self.name = name
+        self.weight = weight
+        self.price = price
+    
+    def print_info(self):
+        print()
 
-class B(A):
-    pass
+class MixinLog:
+    ID = 0
 
-
-class C(A):
-    num = 1
-
-class D(B, C):
-    pass
-
-
-print(D.num)
-print(D.mro())
-print(D.__mro__)
-print(D.num)
-print(D.num)

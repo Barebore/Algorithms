@@ -1,1 +1,1 @@
-
+# хэш-таблица (https://www.youtube.com/watch?v=_EzbLVvao7c)
