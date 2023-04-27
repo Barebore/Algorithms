@@ -19,20 +19,20 @@ class Stack:
         temp2 = self.pop()
         self.push(temp2 + temp1)
 
-    def subtract(self):
-        temp1 = self.pop()
-        temp2 = self.pop()
-        self.push(temp2 - temp1)
+def subtract(self):
+    temp1 = self.pop()
+    temp2 = self.pop()
+    self.push(temp2 - temp1)
 
-    def multiply(self):
-        temp1 = self.pop()
-        temp2 = self.pop()
-        self.push(temp2 * temp1)
+def multiply(self):
+    temp1 = self.pop()
+    temp2 = self.pop()
+    self.push(temp2 * temp1)
 
-    def divide(self):
-        temp1 = self.pop()
-        temp2 = self.pop()
-        self.push(temp2 // temp1)
+def divide(self):
+    temp1 = self.pop()
+    temp2 = self.pop()
+    self.push(temp2 // temp1)
 
 
 if __name__ == "__main__":
