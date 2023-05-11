@@ -1,31 +1,50 @@
 n = int(input())
 arr = []
 for i in range(n):
-    arr.append(list(map(int, input().split())))
+    temp = list(map(int, input().split()))
+    if temp not in arr:
+        arr.append(temp)
 
 result = []
-for value in arr:
+arr = sorted(arr)
+for val in arr:
     if result == []:
-        result.append(value)
-    flag = 0
-    for i in result:
-        if i[0] - 1 <= value[0] and i[1] + 1 >= value[1]:
-            i[0] = value[0]
-            i[1] = value[1]
-            flag = True
-            break
-        if i[0] - 1 <= value[0]:
-            i[0] = value[0]
-            flag = True
-        if i[1] + 1 >= value[1]:
-            i[1] = value[1]
-            flag = True
-        if value[0] >= i[0] and value[1] <= i[1]:
-            flag = True
-            break
-    if not flag:
-        result.append(value)
+        result.append(val)
+    else:
+        flag = False
+        for res in result:
+            # когда диапазон включает в себя текущий
+            if val[0] <= res[0] and val[1] >= res[1]:
+                res[0], res[1] = val[0], val[1]
+                flag = False
+                break
+            #когда оба значения входят в диапазон
+            if val[0] >= res[0] and val[1] <= res[1]:
+                flag = False
+                break
+            # когда пересечений нет
+            if (val[0] < res[1] and val[1] < res[1] or
+                val[0] > res[1] and val[1] > res[1]):
+                flag = True
+            # когда правое занчение касается диапазона слева
+            if val[0] < res[0] and (val[1] == res[1] or val[1]+1 == res[1]):
+                res[0] = val[1]
+                flag = False
+                break
+            # когда левое занчение касается диапазона справа
+            if (val[0] <= res[1] or val[0] + 1 == res[1])  and (val[1] > res[1]):
+                res[1] = val[1]
+                flag = False
+                break
+            # когда левое значение попадает в диапазон
+            if val[0] <= res[0] and val[1] >= res[1]:
+                res[1] = val[1]
+                flag = False
+                break
+        if flag:
+            result.append(val)
 
-
-print(arr)
-print(result)
+for i in result:
+    print(*i)
+# print(arr)
+# print(result)

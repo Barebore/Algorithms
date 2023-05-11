@@ -1,4 +1,3 @@
-for i in range(len(str(a))):
-    if str(a)[i] != str(b)[i]:
-        print(str(a)[i], str(b)[i], i)
-
+a = {3,5}
+b = {4}
+print(a^b)

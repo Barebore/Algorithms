@@ -1,13 +1,12 @@
 a = input()
 b = input()
 start = 0
-def verify(a,b):
+def verify(a, b):
     start = 0
     for word in a:
-        if word in b:
-            start = b.index(word)
-            b = b[start:]
-        else:
+        try:
+            start = b.index(word, start) + 1
+        except ValueError:
             return False
     return True
 
