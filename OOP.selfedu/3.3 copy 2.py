@@ -1,14 +1,28 @@
-class Model:
-    def query(self, *args, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
-
-    def __str__(self):
-        result = 'Model'
-        if self.__dict__:
-            result += ': ' + ', '.join(f"{k} = {v}" for k, v in self.__dict__.items())
-        return result
+class WordString:
+    def __init__(self, word=''):
+        self._string = word
     
-model = Model()
-# model.query(id=1, fio='Sergey', old=33)
-print(model)
+    def __len__(self):
+        return len(self.string.split())
+    
+    def __call__(self, index):
+        return self.string.split()[index]
+    
+    @property
+    def string(self):
+        return self._string
+    
+    @string.setter
+    def string(self, value):
+        self._string = value
+
+    @string.deleter
+    def string(self):
+        del self._string
+
+words = WordString()
+words.string = "Курс по Python ООП"
+n = len(words)
+first = "" if n == 0 else words(0)
+print(words.string)
+print(f"Число слов: {n}; первое слово: {first}")
