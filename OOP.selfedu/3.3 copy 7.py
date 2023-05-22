@@ -1,31 +1,41 @@
-class DeltaClock:
-    def __init__(self, clock1, clock2):
-        self.clock1 = clock1
-        self.clock2 = clock2
+class Recipe:
+    def __init__(self, *args):
+        self.ing = [*args]
+    def add_ingredient(self, *args):
+        self.ing.append(*args)
 
-    def __str__(self):
-        seconds = self.clock1.get_time() - self.clock2.get_time()
-        hours = seconds // 3600
-        if hours < 0:
-            return f'00: 00: 00'
-        minutes = (seconds % 3600) // 60
-        seconds = seconds % 60
-        return f"{hours:02d}: {minutes:02d}: {seconds:02d}"
+    def remove_ingredient(self, ing):
+        del(self.ing[self.ing.index(ing)])
+
+    def get_ingredients(self):
+        return tuple(self.ing)
     
     def __len__(self):
-        return self.clock1.get_time() - self.clock2.get_time()
+        return len(self.ing)
 
-class Clock:
-    def __init__(self, hours, minutes, seconds):
-        self.hours = hours
-        self.minutes = minutes
-        self.seconds = seconds
 
-    def get_time(self):
-        return self.hours * 3600 + self.minutes * 60 + self.seconds
+class Ingredient:
+    def __init__(self, name, volume, measure):
+        self.name = name
+        self.volume = volume
+        self.measure = measure
+
+    def __str__(self) -> str:
+        return f'{self.name}: {self.volume}, {self.measure}'
     
-
-dt = DeltaClock(Clock(2, 45, 0), Clock(1, 15, 0))
-print(dt) # 01: 30: 00
-len_dt = len(dt) # 5400
-print(len_dt)
+i1 = Ingredient("Соль", 1, "столовая ложка")
+i2 = Ingredient("Мука", 1, "кг")
+i3 = Ingredient("Мясо баранины", 10, "кг")
+i4 = Ingredient("Масло", 100, "гр")
+recipe = Recipe(i1, i2, i3)
+recipe.add_ingredient(i4)
+recipe.remove_ingredient(i3)
+assert len(recipe) == 3, "функция len вернула неверное значение"
+lst = recipe.get_ingredients()
+for x in lst:
+    assert isinstance(x, Ingredient), "в списке рецептов должны быть только объекты класса Ingredient"
+    assert hasattr(x, 'name') and hasattr(x, 'volume') and hasattr(x, 'measure'), "объект класса Ingredient должен иметь атрибуты: name, volume, measure"
+assert str(i4) == "Масло: 100, гр", "метод __str__ вернул неверное значение"
+i4 = Ingredient("Масло", 120, "гр")
+recipe.add_ingredient(i4)
+assert len(recipe) == 4, "функция len вернула неверное значение"
