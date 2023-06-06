@@ -1,73 +1,44 @@
-class Dimensions:
-    MIN_DIMENSION = 10
-    MAX_DIMENSION = 10000
+import re
 
-    def __init__(self, a,b,c):
-        self.__a = a
-        self.__b = b
-        self.__c = c
+class StringText:
+    def __init__(self, words):
+        self.words = words
 
-    @classmethod
-    def validate_dimension(cls, value):
-        return value <= cls.MIN_DIMENSION and value <= cls.MAX_DIMENSION
+    def __str__(self):
+        return ' '.join(self.words)
 
-    @property
-    def a(self):
-        return self.__a
-    
-    @a.setter
-    def a(self, value):
-        if self.validate_dimension(value):
-            self.__a = value
-
-    @property
-    def b(self):
-        return self.__b
-
-    @b.setter
-    def b(self, value):
-        if self.validate_dimension(value):
-            self.__b = value
-
-    @property
-    def c(self):
-        return self.__c
-
-    @c.setter
-    def c(self, value):
-        if self.validate_dimension(value):
-            self.__c = value
-
-    def size(self):
-        return self.a * self.b * self.c
-    
-    # >=
-    def __ge__(self, other):
-        return self.size() >= other.size()
-    
-    # <=
-    def __le__(self, other):
-        return self.size() <= other.size()
-    
-    # >
-    def __gt__(self, other):
-        return self.size() > other.size()
-    
-    # <
     def __lt__(self, other):
-        return self.size() < other.size()
-    
+        return len(self.words) < len(other.words)
 
-class ShopItem:
-    def __init__(self, name, price, dim):
-        self.name = name
-        self.price = price
-        self.dim = dim
+    def __le__(self, other):
+        return len(self.words) <= len(other.words)
 
-trainers = ShopItem('кеды', 1024, Dimensions(40, 30, 120))
-umbrella = ShopItem('зонт', 500.24, Dimensions(10, 20, 50))
-fridge = ShopItem('холодильник', 40000, Dimensions(2000, 600, 500))
-chair = ShopItem('табуретка', 2000.99, Dimensions(500, 200, 200))
-lst_shop = (trainers, umbrella, fridge, chair)
-lst_shop_sorted = sorted(lst_shop, key=lambda x: x.dim.size())
-# print([item.name for item in lst_shop_sorted])
+    def __gt__(self, other):
+        return len(self.words) > len(other.words)
+
+    def __ge__(self, other):
+        return len(self.words) >= len(other.words)
+
+
+# исходный текст
+stich = ["Я к вам пишу – чего же боле?",
+        "Что я могу еще сказать?",
+        "Теперь, я знаю, в вашей воле",
+        "Меня презреньем наказать.",
+        "Но вы, к моей несчастной доле",
+        "Хоть каплю жалости храня,",
+        "Вы не оставите меня."]
+
+lst_text = []
+
+for line in stich:
+    line = re.sub(r'[–?!,.;]', '', line)  # убираем знаки препинания
+    words = line.split()  # разбиваем строку на слова
+    st = StringText(words)  # создаем объект StringText
+    lst_text.append(st)  # добавляем в список
+
+# сортируем по убыванию числа слов
+lst_text_sorted = sorted(lst_text, reverse=True)
+
+# преобразуем в список строк
+lst_text_sorted = [str(st) for st in lst_text_sorted]
