@@ -1,30 +1,59 @@
+import pprint
 import sys
-class ShopItem:
-    def __init__(self, name, weight, price):
-        self.name = name
-        self.weight = weight
-        self.price = price
+
+
+class DataBase:
+    def __init__(self, path):
+        self.path = path
+        self.dict_db = {}
+
+    def write(self, obj):
+        if obj not in self.dict_db:
+            self.dict_db[obj] = [obj]
+        else:
+            self.dict_db[obj].append(obj)
+
+
+    def read(self, pk):
+        for i in self.dict_db:
+            if i.pk == pk:
+                return i
+
+
+class Record:
+    pk = 0
+    def __init__(self, fio, descr, old):
+        self.fio = fio
+        self.descr = descr
+        self.old = int(old)
+        # auto
+        self.pk = Record.pk
+        Record.pk += 1
 
     def __hash__(self):
-        return hash((self.name.lower(), self.weight, self.price))
+        return hash((self.fio.lower(), self.old))
     
     def __eq__(self, other):
-        return hash(self) == hash(other)
-    
-# Sample Input:
-# Системный блок: 1500 75890.56
-# Монитор Samsung: 2000 34000
-# Клавиатура: 200.44 545
-# Монитор Samsung: 2000 34000
+        if hash(self) == hash(other):
+            return True
+        else:
+            return False
+        
 
 lst_in = list(map(str.strip, sys.stdin.readlines()))
-dct = {}
-for item in lst_in:
-    name = item.split(':')[0]
-    weight, price = map(float, item.split(':')[1].split())
-    if ShopItem(name, weight, price) in dct:
-        dct[ShopItem(name, weight, price)][1] += 1
-    else:
-        dct[ShopItem(name, weight, price)] = [ShopItem(name, weight, price), 1]
 
-print(dct)
+# "ФИО; характеристика; возраст"
+# Например:
+# Балакирев С.М.; программист; 33
+# Кузнецов А.В.; разведчик-нелегал; 35
+# Суворов А.В.; полководец; 42
+# Иванов И.И.; фигурант всех подобных списков; 26
+# Балакирев С.М.; преподаватель; 37
+
+db = DataBase("db.txt")
+
+for i in lst_in:
+    fio, descr, old = i.split(";")
+    db.write(Record(fio, descr, old))
+
+pprint.pprint(db.dict_db)
