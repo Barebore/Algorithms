@@ -1,26 +1,28 @@
-import sys
-
-# здесь объявляйте класс
-class BookStudy:
-    def __init__(self, name, author, year):
-        self.name = name
-        self.author = author
-        self.year = year
+class Dimensions:
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
+        if self.a<0 or self.b<0 or self.c<0:
+            raise ValueError("габаритные размеры должны быть положительными числами")
 
     def __hash__(self):
-        return hash((self.name.lower(),self.author))
+        return hash((self.a, self.b, self.c))
+    
+    def __setattr__(self, name, value):
+        if '.' in str(value):
+            super().__setattr__(name, float(value))
+        else:
+            super().__setattr__(name, int(value))
 
-# считывание списка из входного потока
-lst_in = list(map(str.strip, sys.stdin.readlines()))  # список lst_in не менять!
+    
 
-# здесь продолжайте программу (используйте список строк lst_in)
-lst_bs = []
-for string in lst_in:
-    lst_bs.append(BookStudy(*string.split(';')))
+s_inp = input()  # эту строку (переменную s_inp) в программе не менять
 
-unique_books = 0
-temp = set()
-for book in lst_bs:
-    temp.add(hash(book))
+lst_dims = []
+for string in s_inp.split(';'):
+    lst_dims.append(Dimensions(*string.split()))
 
-unique_books = len(temp)
+lst_dims = sorted(lst_dims, key=lambda x: hash(x))
+
+
