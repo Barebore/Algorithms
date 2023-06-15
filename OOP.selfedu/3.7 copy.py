@@ -1,5 +1,3 @@
-import sys
-
 class MailBox:
     def __init__(self):
         self.inbox_list = []
@@ -11,7 +9,7 @@ class MailBox:
 
 class MailItem:
     def __init__(self, mail_from, title, content):
-        self.mail_from = mail_from
+        self.mail_from = mail_from 
         self.title = title
         self.content = content
         self.is_read = False
