@@ -1,13 +1,18 @@
-list1 = [1,2,3]
-list2 = [4,5,6]
+# def remove_duplicates(lst):
+#     # Преобразование словарей в кортежи
+#     tuples_lst = [tuple(d.items()) for d in lst]
+#     print(tuples_lst)
 
-new_list = list(list(list1 + list2))
+#     # Создание множества для удаления дубликатов
+#     tuples_set = set(tuples_lst)
+#     print(tuples_lst)
 
-print(new_list)
+#     # Преобразование кортежей обратно в словари
+#     result = [dict(t) for t in tuples_set]
 
-value = 800.0005
-value1 = float(800)
-print(round(value,1))
-print(round(value1))
+#     return result
 
-print(value == value1)
+# print(remove_duplicates([{"key1": "value1"}, {"k1": "v1", "k2": "v2", "k3": "v3"}, {}, {}, {"key1": "value1"}, {"key1": "value1"}, {"key2": "value2"}]))
+
+a = [0] * 10
+print(a)
