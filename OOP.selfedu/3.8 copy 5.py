@@ -1,50 +1,19 @@
-class StackObj:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-
-class Stack:
-    def __init__(self):
-        self.top = None
-        self.length = 0
-
-    def push(self, obj):
-        self.length += 1
-        if self.top == None:
-            self.top = obj
-        else:
-            obj.next = self.top
-            self.top = obj
-
-    def pop(self):
-        self.length -= 1
-        temp = self.top
-        self.top = self.top.next
-        return temp
+class RadiusVector:
+    def __init__(self, *args, **kwargs):
+        self.coords = [*args]
     
-    def __getitem__(self, index):
-        if index < 0 or type(index) != int or index >= self.length:
-            raise IndexError('неверный индекс')
-        temp = self.top
-        for i in range(self.length - index -1):
-            temp = temp.next
-        return temp
+    def __getitem__(self, key):
+        if isinstance(key, slice):
+            return tuple(self.coords[key.start:key.stop:key.step])
+        return self.coords[key]
     
-    def __setitem__(self, index, obj):
-        if index < 0 or type(index) != int or index >= self.length:
-            raise IndexError('неверный индекс')
-        temp = self.top
-        for i in range(index):
-            temp = temp.next
-        temp.data = obj.data
+    def __setitem__(self, index, value):
+        self.coords[index] = value
 
 
-
-st = Stack()
-st.push(StackObj("obj1"))
-st.push(StackObj("obj2"))
-st.push(StackObj("obj3"))
-st[1] = StackObj("new obj2")
-print(st[2].data) # obj3
-print(st[1].data) # new obj2
-# res = st[3] # исключение IndexError
+v = RadiusVector(1, 1, 1, 1)
+print(v[1]) # 1
+v[:] = 1, 2, 3, 4
+print(v[2]) # 3
+print(v[1:]) # (2, 3, 4)
+v[0] = 10.5
