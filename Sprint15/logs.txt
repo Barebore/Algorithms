@@ -1,0 +1,1004 @@
+ => => transferring dockerfile: 280B                                                                                     0.1s
+ => [pattern_generator internal] load .dockerignore                                                                      2.0s
+ => => transferring context: 2B                                                                                          0.0s
+ => [knit_django internal] load .dockerignore                                                                            2.4s
+ => => transferring context: 2B                                                                                          0.0s
+ => [knit_django internal] load build definition from Dockerfile                                                         2.2s
+ => => transferring dockerfile: 247B                                                                                     0.3s
+ => [worker internal] load .dockerignore                                                                                 3.0s
+ => => transferring context: 2B                                                                                          0.0s
+ => [worker internal] load build definition from Dockerfile                                                              3.1s
+ => => transferring dockerfile: 247B                                                                                     0.1s
+ => [yarn_back internal] load metadata for docker.io/library/openjdk:17-jdk-slim-buster                                  0.0s
+ => [frontend internal] load metadata for docker.io/library/node:18                                                      4.5s
+ => [yarn_back 1/3] FROM docker.io/library/openjdk:17-jdk-slim-buster                                                    0.0s
+ => [yarn_back internal] load build context                                                                              0.4s
+ => => transferring context: 267B                                                                                        0.1s
+ => [frontend auth] library/node:pull token for registry-1.docker.io                                                     0.0s
+ => [pattern_generator internal] load metadata for docker.io/library/python:3.6                                          3.2s
+ => [knit_django internal] load metadata for docker.io/library/python:3.9                                                2.7s
+ => [pattern_generator auth] library/python:pull token for registry-1.docker.io                                          0.0s
+ => CACHED [yarn_back 2/3] COPY YarnApp-0.0.1-SNAPSHOT.jar /app/yarn_back.jar                                            0.0s
+ => CACHED [yarn_back 3/3] COPY /resources/ /app/resources                                                               0.0s
+ => [yarn_back] exporting to image                                                                                       0.1s
+ => => exporting layers                                                                                                  0.0s
+ => => writing image sha256:282c8dd295d3aa4696208dca878216c589eec5da151aa7c640e5ccdbd7e2ff8a                             0.0s
+ => => naming to docker.io/library/app-yarn_back                                                                         0.0s
+ => [worker 1/6] FROM docker.io/library/python:3.9@sha256:98f018a1afd67f2e17a4abd5bfe09b998734ba7c1ee54780e7ed216f8b809  0.0s
+ => [knit_django internal] load build context                                                                            2.7s
+ => => transferring context: 184.48kB                                                                                    2.1s
+ => [worker internal] load build context                                                                                 2.3s
+ => => transferring context: 184.48kB                                                                                    1.7s
+ => [frontend 1/4] FROM docker.io/library/node:18@sha256:19892542dd80e33aec50a51619ab36db0921de240c6a4ff6024d801f848812  0.7s
+ => => resolve docker.io/library/node:18@sha256:19892542dd80e33aec50a51619ab36db0921de240c6a4ff6024d801f84881293         0.6s
+ => [frontend internal] load build context                                                                               2.9s
+ => => transferring context: 80.41kB                                                                                     2.6s
+ => [pattern_generator 1/7] FROM docker.io/library/python:3.6@sha256:f8652afaf88c25f0d22354d547d892591067aa4026a7fa9a68  0.0s
+ => [pattern_generator internal] load build context                                                                      0.8s
+ => => transferring context: 9.36kB                                                                                      0.6s
+ => CACHED [pattern_generator 2/7] WORKDIR /app                                                                          0.0s
+ => CACHED [pattern_generator 3/7] RUN pip install gunicorn==20.1.0                                                      0.0s
+ => CACHED [pattern_generator 4/7] COPY requirements.txt .                                                               0.0s
+ => CACHED [pattern_generator 5/7] RUN pip install -r requirements.txt --no-cache-dir                                    0.0s
+ => CACHED [pattern_generator 6/7] COPY . .                                                                              0.0s
+ => CACHED [pattern_generator 7/7] WORKDIR /app/pattern_api                                                              0.0s
+ => [pattern_generator] exporting to image                                                                               0.1s
+ => => exporting layers                                                                                                  0.0s
+ => => writing image sha256:bf05a54dc3519160b19d9233c523494f5aa3e165cc8391b05a0c449ada604f1a                             0.1s
+ => => naming to docker.io/library/app-pattern_generator                                                                 0.1s
+ => CACHED [worker 2/6] WORKDIR /app                                                                                     0.0s
+ => CACHED [worker 3/6] RUN pip install gunicorn==20.1.0                                                                 0.0s
+ => CACHED [worker 4/6] COPY requirements.txt .                                                                          0.0s
+ => CACHED [worker 5/6] RUN pip install -r requirements.txt --no-cache-dir                                               0.0s
+ => CACHED [worker 6/6] COPY . .                                                                                         0.1s
+ => [worker] exporting to image                                                                                          0.5s
+ => => exporting layers                                                                                                  0.0s
+ => => writing image sha256:952538b7b3fdab19e90986d1de013466da838528921ea9195951b91b6f850fdd                             0.1s
+ => => naming to docker.io/library/app-worker                                                                            0.3s
+ => [knit_django] exporting to image                                                                                     0.4s
+ => => exporting layers                                                                                                  0.0s
+ => => writing image sha256:b9dcc2628ff7cc190a5082b30c9123052938c25b0aacb0773fcdd3698bdb2664                             0.3s
+ => => naming to docker.io/library/app-knit_django                                                                       0.1s
+ => CACHED [frontend 2/4] WORKDIR /app                                                                                   0.0s
+ => CACHED [frontend 3/4] COPY ./YarnZone ./                                                                             0.0s
+ => CACHED [frontend 4/4] RUN yarn install && yarn build                                                                 0.0s
+ => [frontend] exporting to image                                                                                        0.2s
+ => => exporting layers                                                                                                  0.0s
+ => => writing image sha256:2f7d3da2ded19cb7c4eaa1b31e4dc212cf72f832b3f1a11579365f552ca2540d                             0.1s
+ => => naming to docker.io/library/app-frontend                                                                          0.1s
+WARN[0014] Found orphan containers ([app-gateway-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up. 
+[+] Running 3/0
+ ⠋ Container worker             Creating                                                                                 0.0s 
+ ✔ Container yarn_back          Running                                                                                  0.0s 
+ ✔ Container frontend           Running                                                                                  0.0s 
+ ✔ Container pattern_generator  Running                                                                                  0.0s 
+Error response from daemon: conflicting options: host type networking can't be used with links. This would result in undefined behavior
+root@debian-test:/app# ды
+bash: ды: команда не найдена
+root@debian-test:/app# ls
+back  docker-compose.yml  frontend  gateway  knit_django  pattern_generator
+root@debian-test:/app# nano docker-compose.yml 
+root@debian-test:/app# docker compose up --build -d
+[+] Building 11.0s (44/47)                                                                                                    
+ => [worker internal] load build definition from Dockerfile                                                              0.7s
+ => => transferring dockerfile: 247B                                                                                     0.0s
+ => [worker internal] load .dockerignore                                                                                 0.9s
+ => => transferring context: 2B                                                                                          0.0s
+ => [yarn_back internal] load build definition from Dockerfile                                                           1.2s
+ => => transferring dockerfile: 257B                                                                                     0.0s
+ => [yarn_back internal] load .dockerignore                                                                              1.3s
+ => => transferring context: 2B                                                                                          0.0s
+ => [frontend internal] load build definition from Dockerfile                                                            1.4s
+ => => transferring dockerfile: 402B                                                                                     0.0s
+ => [frontend internal] load .dockerignore                                                                               0.9s
+ => => transferring context: 2B                                                                                          0.0s
+ => [pattern_generator internal] load build definition from Dockerfile                                                   1.5s
+ => => transferring dockerfile: 280B                                                                                     0.0s
+ => [pattern_generator internal] load .dockerignore                                                                      2.0s
+ => => transferring context: 2B                                                                                          0.0s
+ => [knit_django internal] load build definition from Dockerfile                                                         2.3s
+ => => transferring dockerfile: 247B                                                                                     0.0s
+ => [knit_django internal] load .dockerignore                                                                            2.5s
+ => => transferring context: 2B                                                                                          0.0s
+ => [knit_django internal] load metadata for docker.io/library/python:3.9                                                5.0s
+ => [yarn_back internal] load metadata for docker.io/library/openjdk:17-jdk-slim-buster                                  0.0s
+ => [yarn_back 1/3] FROM docker.io/library/openjdk:17-jdk-slim-buster                                                    0.0s
+ => [yarn_back internal] load build context                                                                              0.7s
+ => => transferring context: 267B                                                                                        0.0s
+ => [frontend internal] load metadata for docker.io/library/node:18                                                      3.0s
+ => [pattern_generator internal] load metadata for docker.io/library/python:3.6                                          1.9s
+ => [knit_django 1/6] FROM docker.io/library/python:3.9@sha256:98f018a1afd67f2e17a4abd5bfe09b998734ba7c1ee54780e7ed216f  0.0s
+ => [worker internal] load build context                                                                                 0.4s
+ => => transferring context: 184.48kB                                                                                    0.1s
+ => CACHED [yarn_back 2/3] COPY YarnApp-0.0.1-SNAPSHOT.jar /app/yarn_back.jar                                            0.0s
+ => CACHED [yarn_back 3/3] COPY /resources/ /app/resources                                                               0.0s
+ => [yarn_back] exporting to image                                                                                       0.4s
+ => => exporting layers                                                                                                  0.0s
+ => => writing image sha256:282c8dd295d3aa4696208dca878216c589eec5da151aa7c640e5ccdbd7e2ff8a                             0.1s
+ => => naming to docker.io/library/app-yarn_back                                                                         0.1s
+ => CACHED [worker 2/6] WORKDIR /app                                                                                     0.0s
+ => CACHED [worker 3/6] RUN pip install gunicorn==20.1.0                                                                 0.0s
+ => CACHED [worker 4/6] COPY requirements.txt .                                                                          0.0s
+ => CACHED [worker 5/6] RUN pip install -r requirements.txt --no-cache-dir                                               0.0s
+ => CACHED [worker 6/6] COPY . .                                                                                         0.0s
+ => [worker] exporting to image                                                                                          0.2s
+ => => exporting layers                                                                                                  0.0s
+ => => writing image sha256:952538b7b3fdab19e90986d1de013466da838528921ea9195951b91b6f850fdd                             0.1s
+ => => naming to docker.io/library/app-worker                                                                            0.1s
+ => [pattern_generator 1/7] FROM docker.io/library/python:3.6@sha256:f8652afaf88c25f0d22354d547d892591067aa4026a7fa9a68  0.0s
+ => [pattern_generator internal] load build context                                                                      0.3s
+ => => transferring context: 9.36kB                                                                                      0.0s
+ => [frontend 1/4] FROM docker.io/library/node:18@sha256:19892542dd80e33aec50a51619ab36db0921de240c6a4ff6024d801f848812  3.1s
+ => => resolve docker.io/library/node:18@sha256:19892542dd80e33aec50a51619ab36db0921de240c6a4ff6024d801f84881293         3.1s
+ => [frontend internal] load build context                                                                               0.8s
+ => => transferring context: 80.41kB                                                                                     0.0s
+ => CACHED [pattern_generator 2/7] WORKDIR /app                                                                          0.0s
+ => CACHED [pattern_generator 3/7] RUN pip install gunicorn==20.1.0                                                      0.0s
+ => CACHED [pattern_generator 4/7] COPY requirements.txt .                                                               0.0s
+ => CACHED [pattern_generator 5/7] RUN pip install -r requirements.txt --no-cache-dir                                    0.0s
+ => CACHED [pattern_generator 6/7] COPY . .                                                                              0.0s
+ => CACHED [pattern_generator 7/7] WORKDIR /app/pattern_api                                                              0.0s
+ => [pattern_generator] exporting to image                                                                               0.2s
+ => => exporting layers                                                                                                  0.0s
+ => => writing image sha256:bf05a54dc3519160b19d9233c523494f5aa3e165cc8391b05a0c449ada604f1a                             0.1s
+ => => naming to docker.io/library/app-pattern_generator                                                                 0.1s
+ => [knit_django internal] load build context                                                                            0.4s
+ => => transferring context: 184.48kB                                                                                    0.1s
+ => [knit_django] exporting to image                                                                                     0.3s
+ => => exporting layers                                                                                                  0.0s
+ => => writing image sha256:b9dcc2628ff7cc190a5082b30c9123052938c25b0aacb0773fcdd3698bdb2664                             0.1s
+ => => naming to docker.io/library/app-knit_django                                                                       0.1s
+ => CACHED [frontend 2/4] WORKDIR /app                                                                                   0.0s
+ => CACHED [frontend 3/4] COPY ./YarnZone ./                                                                             0.0s
+ => CACHED [frontend 4/4] RUN yarn install && yarn build                                                                 0.0s
+ => [frontend] exporting to image                                                                                        0.1s
+ => => exporting layers                                                                                                  0.0s
+ => => writing image sha256:2f7d3da2ded19cb7c4eaa1b31e4dc212cf72f832b3f1a11579365f552ca2540d                             0.1s
+ => => naming to docker.io/library/app-frontend                                                                          0.1s
+WARN[0011] Found orphan containers ([app-gateway-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up. 
+[+] Running 6/6
+ ✔ Container yarn_back                 Running                                                                           0.0s 
+ ✔ Container frontend                  Running                                                                           0.0s 
+ ✔ Container pattern_generator         Running                                                                           0.0s 
+ ✔ Container worker                    Started                                                                          10.4s 
+ ✔ Container app-redis-1               Started                                                                           2.4s 
+ ✔ Container 180e4f2e7923_knit_django  Started                                                                           2.7s 
+root@debian-test:/app# docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                     PORTS     NAMES
+6f6578c16be7   app-worker              "celery -A celery_ap…"   18 seconds ago   Exited (2) 7 seconds ago             worker
+76a959304905   app-knit_django         "gunicorn --bind 0.0…"   6 minutes ago    Up 15 seconds                        180e4f2e7923_knit_django
+43ccdf44b3e5   redis:7.0.5-alpine      "docker-entrypoint.s…"   6 minutes ago    Up 15 seconds                        app-redis-1
+da322c37cfe9   app-yarn_back           "java -jar -Djava.ne…"   2 hours ago      Up 2 hours                           yarn_back
+d4560c2a62e3   app-frontend            "docker-entrypoint.s…"   6 hours ago      Up 6 hours                           frontend
+bc3e22b22a66   app-gateway             "/docker-entrypoint.…"   11 days ago      Exited (1) 6 hours ago               app-gateway-1
+ded2014a7097   app-pattern_generator   "gunicorn --bind 0.0…"   11 days ago      Up 6 hours                           pattern_generator
+root@debian-test:/app# docker rm bc3e22b22a66
+bc3e22b22a66
+root@debian-test:/app# docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                      PORTS     NAMES
+6f6578c16be7   app-worker              "celery -A celery_ap…"   52 seconds ago   Exited (2) 41 seconds ago             worker
+76a959304905   app-knit_django         "gunicorn --bind 0.0…"   6 minutes ago    Up 48 seconds                         180e4f2e7923_knit_django
+43ccdf44b3e5   redis:7.0.5-alpine      "docker-entrypoint.s…"   6 minutes ago    Up 49 seconds                         app-redis-1
+da322c37cfe9   app-yarn_back           "java -jar -Djava.ne…"   2 hours ago      Up 2 hours                            yarn_back
+d4560c2a62e3   app-frontend            "docker-entrypoint.s…"   6 hours ago      Up 6 hours                            frontend
+ded2014a7097   app-pattern_generator   "gunicorn --bind 0.0…"   11 days ago      Up 6 hours                            pattern_generator
+root@debian-test:/app# docker compose up --build -d
+[+] Building 10.9s (44/47)                                                                                                               
+ => [frontend internal] load build definition from Dockerfile                                                                       0.9s
+ => => transferring dockerfile: 402B                                                                                                0.0s
+ => [frontend internal] load .dockerignore                                                                                          1.2s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [yarn_back internal] load .dockerignore                                                                                         1.2s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [yarn_back internal] load build definition from Dockerfile                                                                      1.7s
+ => => transferring dockerfile: 257B                                                                                                0.0s
+ => [worker internal] load .dockerignore                                                                                            2.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [worker internal] load build definition from Dockerfile                                                                         1.4s
+ => => transferring dockerfile: 247B                                                                                                0.2s
+ => [knit_django internal] load build definition from Dockerfile                                                                    2.1s
+ => => transferring dockerfile: 247B                                                                                                0.0s
+ => [knit_django internal] load .dockerignore                                                                                       2.7s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [pattern_generator internal] load build definition from Dockerfile                                                              2.3s
+ => => transferring dockerfile: 280B                                                                                                0.1s
+ => [pattern_generator internal] load .dockerignore                                                                                 2.5s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [frontend internal] load metadata for docker.io/library/node:18                                                                 1.5s
+ => [yarn_back internal] load metadata for docker.io/library/openjdk:17-jdk-slim-buster                                             0.1s
+ => [yarn_back 1/3] FROM docker.io/library/openjdk:17-jdk-slim-buster                                                               0.0s
+ => [yarn_back internal] load build context                                                                                         1.4s
+ => => transferring context: 267B                                                                                                   0.1s
+ => [pattern_generator internal] load metadata for docker.io/library/python:3.6                                                     2.7s
+ => [worker internal] load metadata for docker.io/library/python:3.9                                                                3.2s
+ => [frontend 1/4] FROM docker.io/library/node:18@sha256:19892542dd80e33aec50a51619ab36db0921de240c6a4ff6024d801f84881293           0.5s
+ => => resolve docker.io/library/node:18@sha256:19892542dd80e33aec50a51619ab36db0921de240c6a4ff6024d801f84881293                    0.5s
+ => [frontend internal] load build context                                                                                          0.4s
+ => => transferring context: 80.41kB                                                                                                0.1s
+ => CACHED [yarn_back 2/3] COPY YarnApp-0.0.1-SNAPSHOT.jar /app/yarn_back.jar                                                       0.0s
+ => CACHED [yarn_back 3/3] COPY /resources/ /app/resources                                                                          0.0s
+ => [yarn_back] exporting to image                                                                                                  0.1s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:282c8dd295d3aa4696208dca878216c589eec5da151aa7c640e5ccdbd7e2ff8a                                        0.1s
+ => => naming to docker.io/library/app-yarn_back                                                                                    0.1s
+ => CACHED [frontend 2/4] WORKDIR /app                                                                                              0.0s
+ => CACHED [frontend 3/4] COPY ./YarnZone ./                                                                                        0.0s
+ => CACHED [frontend 4/4] RUN yarn install && yarn build                                                                            0.0s
+ => [frontend] exporting to image                                                                                                   0.2s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:2f7d3da2ded19cb7c4eaa1b31e4dc212cf72f832b3f1a11579365f552ca2540d                                        0.1s
+ => => naming to docker.io/library/app-frontend                                                                                     0.1s
+ => [pattern_generator 1/7] FROM docker.io/library/python:3.6@sha256:f8652afaf88c25f0d22354d547d892591067aa4026a7fa9a6819df9f300af  0.0s
+ => [pattern_generator internal] load build context                                                                                 0.4s
+ => => transferring context: 9.36kB                                                                                                 0.0s
+ => CACHED [pattern_generator 2/7] WORKDIR /app                                                                                     0.0s
+ => CACHED [pattern_generator 3/7] RUN pip install gunicorn==20.1.0                                                                 0.0s
+ => CACHED [pattern_generator 4/7] COPY requirements.txt .                                                                          0.0s
+ => CACHED [pattern_generator 5/7] RUN pip install -r requirements.txt --no-cache-dir                                               0.0s
+ => CACHED [pattern_generator 6/7] COPY . .                                                                                         0.0s
+ => CACHED [pattern_generator 7/7] WORKDIR /app/pattern_api                                                                         0.4s
+ => [knit_django 1/6] FROM docker.io/library/python:3.9@sha256:98f018a1afd67f2e17a4abd5bfe09b998734ba7c1ee54780e7ed216f8b8095c3     0.0s
+ => [worker internal] load build context                                                                                            1.1s
+ => => transferring context: 184.48kB                                                                                               0.4s
+ => [pattern_generator] exporting to image                                                                                          0.4s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:bf05a54dc3519160b19d9233c523494f5aa3e165cc8391b05a0c449ada604f1a                                        0.1s
+ => => naming to docker.io/library/app-pattern_generator                                                                            0.2s
+ => [knit_django internal] load build context                                                                                       1.2s
+ => => transferring context: 184.48kB                                                                                               0.5s
+ => CACHED [worker 2/6] WORKDIR /app                                                                                                0.0s
+ => CACHED [worker 3/6] RUN pip install gunicorn==20.1.0                                                                            0.0s
+ => CACHED [worker 4/6] COPY requirements.txt .                                                                                     0.0s
+ => CACHED [worker 5/6] RUN pip install -r requirements.txt --no-cache-dir                                                          0.0s
+ => CACHED [worker 6/6] COPY . .                                                                                                    0.0s
+ => [worker] exporting to image                                                                                                     0.4s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:952538b7b3fdab19e90986d1de013466da838528921ea9195951b91b6f850fdd                                        0.3s
+ => => naming to docker.io/library/app-worker                                                                                       0.1s
+ => [knit_django] exporting to image                                                                                                0.4s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:b9dcc2628ff7cc190a5082b30c9123052938c25b0aacb0773fcdd3698bdb2664                                        0.1s
+ => => naming to docker.io/library/app-knit_django                                                                                  0.2s
+[+] Running 6/6
+ ✔ Container frontend                  Running                                                                                      0.0s 
+ ✔ Container pattern_generator         Running                                                                                      0.0s 
+ ✔ Container 180e4f2e7923_knit_django  Running                                                                                      0.0s 
+ ✔ Container app-redis-1               Running                                                                                      0.0s 
+ ✔ Container worker                    Started                                                                                      2.6s 
+ ✔ Container yarn_back                 Running                                                                                      0.0s 
+root@debian-test:/app# docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED              STATUS                     PORTS     NAMES
+6f6578c16be7   app-worker              "celery -A celery_ap…"   About a minute ago   Exited (2) 5 seconds ago             worker
+76a959304905   app-knit_django         "gunicorn --bind 0.0…"   7 minutes ago        Up About a minute                    180e4f2e7923_knit_django
+43ccdf44b3e5   redis:7.0.5-alpine      "docker-entrypoint.s…"   7 minutes ago        Up About a minute                    app-redis-1
+da322c37cfe9   app-yarn_back           "java -jar -Djava.ne…"   2 hours ago          Up 2 hours                           yarn_back
+d4560c2a62e3   app-frontend            "docker-entrypoint.s…"   6 hours ago          Up 6 hours                           frontend
+ded2014a7097   app-pattern_generator   "gunicorn --bind 0.0…"   11 days ago          Up 6 hours                           pattern_generator
+root@debian-test:/app# docker run 6f6578c16be7
+Unable to find image '6f6578c16be7:latest' locally
+docker: Error response from daemon: pull access denied for 6f6578c16be7, repository does not exist or may require 'docker login': denied: requested access to the resource is denied.
+See 'docker run --help'.
+root@debian-test:/app# docker start 6f6578c16be7
+6f6578c16be7
+root@debian-test:/app# docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                     PORTS     NAMES
+6f6578c16be7   app-worker              "celery -A celery_ap…"   4 minutes ago    Exited (2) 3 seconds ago             worker
+76a959304905   app-knit_django         "gunicorn --bind 0.0…"   10 minutes ago   Up 4 minutes                         180e4f2e7923_knit_django
+43ccdf44b3e5   redis:7.0.5-alpine      "docker-entrypoint.s…"   10 minutes ago   Up 4 minutes                         app-redis-1
+da322c37cfe9   app-yarn_back           "java -jar -Djava.ne…"   2 hours ago      Up 2 hours                           yarn_back
+d4560c2a62e3   app-frontend            "docker-entrypoint.s…"   6 hours ago      Up 6 hours                           frontend
+ded2014a7097   app-pattern_generator   "gunicorn --bind 0.0…"   11 days ago      Up 6 hours                           pattern_generator
+root@debian-test:/app# docker start 6f6578c16be7 -i
+Usage: celery [OPTIONS] COMMAND [ARGS]...
+Try 'celery --help' for help.
+
+Error: Invalid value for '-A' / '--app': 
+Unable to load celery application.
+While trying to load the module celery_app.app the following error occurred:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/celery/bin/celery.py", line 57, in convert
+    return find_app(value)
+  File "/usr/local/lib/python3.9/site-packages/celery/app/utils.py", line 384, in find_app
+    sym = symbol_by_name(app, imp=imp)
+  File "/usr/local/lib/python3.9/site-packages/kombu/utils/imports.py", line 59, in symbol_by_name
+    module = imp(module_name, package=package, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/celery/utils/imports.py", line 105, in import_from_cwd
+    return imp(module, package=package)
+  File "/usr/local/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/app/celery_app.py", line 11, in <module>
+    app.conf.broker_url = settings.CELERY_BROKER_URL
+  File "/usr/local/lib/python3.9/site-packages/django/conf/__init__.py", line 102, in __getattr__
+    self._setup(name)
+  File "/usr/local/lib/python3.9/site-packages/django/conf/__init__.py", line 89, in _setup
+    self._wrapped = Settings(settings_module)
+  File "/usr/local/lib/python3.9/site-packages/django/conf/__init__.py", line 217, in __init__
+    mod = importlib.import_module(self.SETTINGS_MODULE)
+  File "/usr/local/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 972, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 984, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'knit_django'
+
+root@debian-test:/app# ls
+back  docker-compose.yml  frontend  gateway  knit_django  pattern_generator
+root@debian-test:/app# cd knit_django/
+root@debian-test:/app/knit_django# ls
+celery_app.py  Dockerfile       __init__.py  knowledge_library  media     pattern_lib  README.md         socks   upload_image
+db.sqlite3     information.txt  knit2        manage.py          odin_ass  pixelation   requirements.txt  static
+root@debian-test:/app/knit_django# nano celery_app.py 
+root@debian-test:/app/knit_django# cat celery_app.py 
+import os
+import time
+from celery import Celery
+from django.conf import settings
+
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'knit2.settings')
+
+app = Celery('knit2')
+app.config_from_object('django.conf:settings', namespace='CELERY')
+app.conf.broker_url = settings.CELERY_BROKER_URL
+app.autodiscover_tasks()
+
+@app.task()
+def debug_task():
+    time.sleep()
+    print('Hello form debug_task')
+root@debian-test:/app/knit_django# ^C
+root@debian-test:/app/knit_django# cd ..
+root@debian-test:/app# ls
+back  docker-compose.yml  frontend  gateway  knit_django  pattern_generator
+root@debian-test:/app# docker compose up --build -d
+[+] Building 42.1s (46/49)                                                                                                               
+ => [yarn_back internal] load .dockerignore                                                                                         1.4s
+ => => transferring context: 2B                                                                                                     0.3s
+ => [yarn_back internal] load build definition from Dockerfile                                                                      1.7s
+ => => transferring dockerfile: 257B                                                                                                0.3s
+ => [frontend internal] load .dockerignore                                                                                          1.5s
+ => => transferring context: 2B                                                                                                     0.1s
+ => [frontend internal] load build definition from Dockerfile                                                                       2.1s
+ => => transferring dockerfile: 402B                                                                                                0.2s
+ => [worker internal] load .dockerignore                                                                                            3.2s
+ => => transferring context: 2B                                                                                                     0.2s
+ => [worker internal] load build definition from Dockerfile                                                                         2.5s
+ => => transferring dockerfile: 247B                                                                                                0.1s
+ => [pattern_generator internal] load .dockerignore                                                                                 3.6s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [pattern_generator internal] load build definition from Dockerfile                                                              1.4s
+ => => transferring dockerfile: 280B                                                                                                0.2s
+ => [knit_django internal] load .dockerignore                                                                                       4.5s
+ => => transferring context: 2B                                                                                                     0.1s
+ => [knit_django internal] load build definition from Dockerfile                                                                    4.7s
+ => => transferring dockerfile: 247B                                                                                                0.4s
+ => [yarn_back internal] load metadata for docker.io/library/openjdk:17-jdk-slim-buster                                             0.0s
+ => [yarn_back 1/3] FROM docker.io/library/openjdk:17-jdk-slim-buster                                                               0.3s
+ => [yarn_back internal] load build context                                                                                         0.8s
+ => => transferring context: 267B                                                                                                   0.2s
+ => [frontend internal] load metadata for docker.io/library/node:18                                                                 6.3s
+ => [frontend auth] library/node:pull token for registry-1.docker.io                                                                0.0s
+ => [worker internal] load metadata for docker.io/library/python:3.9                                                                5.1s
+ => [pattern_generator internal] load metadata for docker.io/library/python:3.6                                                     4.6s
+ => [worker auth] library/python:pull token for registry-1.docker.io                                                                0.0s
+ => CACHED [yarn_back 2/3] COPY YarnApp-0.0.1-SNAPSHOT.jar /app/yarn_back.jar                                                       0.0s
+ => CACHED [yarn_back 3/3] COPY /resources/ /app/resources                                                                          0.0s
+ => [yarn_back] exporting to image                                                                                                  0.2s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:282c8dd295d3aa4696208dca878216c589eec5da151aa7c640e5ccdbd7e2ff8a                                        0.1s
+ => => naming to docker.io/library/app-yarn_back                                                                                    0.1s
+ => [frontend 1/4] FROM docker.io/library/node:18@sha256:19892542dd80e33aec50a51619ab36db0921de240c6a4ff6024d801f84881293           1.1s
+ => => resolve docker.io/library/node:18@sha256:19892542dd80e33aec50a51619ab36db0921de240c6a4ff6024d801f84881293                    1.1s
+ => [frontend internal] load build context                                                                                          3.1s
+ => => transferring context: 80.41kB                                                                                                1.7s
+ => [pattern_generator 1/7] FROM docker.io/library/python:3.6@sha256:f8652afaf88c25f0d22354d547d892591067aa4026a7fa9a6819df9f300af  0.0s
+ => [pattern_generator internal] load build context                                                                                 1.2s
+ => => transferring context: 9.36kB                                                                                                 0.5s
+ => [knit_django 1/6] FROM docker.io/library/python:3.9@sha256:98f018a1afd67f2e17a4abd5bfe09b998734ba7c1ee54780e7ed216f8b8095c3     0.0s
+ => [worker internal] load build context                                                                                            3.1s
+ => => transferring context: 184.89kB                                                                                               2.6s
+ => [knit_django internal] load build context                                                                                       3.5s
+ => => transferring context: 184.89kB                                                                                               2.5s
+ => CACHED [pattern_generator 2/7] WORKDIR /app                                                                                     0.0s
+ => CACHED [pattern_generator 3/7] RUN pip install gunicorn==20.1.0                                                                 0.0s
+ => CACHED [pattern_generator 4/7] COPY requirements.txt .                                                                          0.0s
+ => CACHED [pattern_generator 5/7] RUN pip install -r requirements.txt --no-cache-dir                                               0.0s
+ => CACHED [pattern_generator 6/7] COPY . .                                                                                         0.0s
+ => CACHED [pattern_generator 7/7] WORKDIR /app/pattern_api                                                                         0.0s
+ => [pattern_generator] exporting to image                                                                                          0.2s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:bf05a54dc3519160b19d9233c523494f5aa3e165cc8391b05a0c449ada604f1a                                        0.1s
+ => => naming to docker.io/library/app-pattern_generator                                                                            0.1s
+ => CACHED [worker 2/6] WORKDIR /app                                                                                                0.0s
+ => CACHED [worker 3/6] RUN pip install gunicorn==20.1.0                                                                            0.0s
+ => CACHED [worker 4/6] COPY requirements.txt .                                                                                     0.0s
+ => CACHED [worker 5/6] RUN pip install -r requirements.txt --no-cache-dir                                                          0.0s
+ => [worker 6/6] COPY . .                                                                                                          12.6s
+ => CACHED [frontend 2/4] WORKDIR /app                                                                                              0.0s
+ => CACHED [frontend 3/4] COPY ./YarnZone ./                                                                                        0.0s
+ => CACHED [frontend 4/4] RUN yarn install && yarn build                                                                            0.0s
+ => [frontend] exporting to image                                                                                                   0.2s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:2f7d3da2ded19cb7c4eaa1b31e4dc212cf72f832b3f1a11579365f552ca2540d                                        0.1s
+ => => naming to docker.io/library/app-frontend                                                                                     0.1s
+ => [knit_django] exporting to image                                                                                                8.7s
+ => => exporting layers                                                                                                             7.7s
+ => => writing image sha256:7bc3fa60bd1c730466de55ce1af9169ca3d85e33066831de24779bac0b93e618                                        0.2s
+ => => naming to docker.io/library/app-knit_django                                                                                  0.7s
+ => [worker] exporting to image                                                                                                     8.9s
+ => => exporting layers                                                                                                             7.8s
+ => => writing image sha256:9e5c45e67ab90b62e8c14e7d4a80545d7a2894b3459b2f2147d50a00df79bad5                                        0.3s
+ => => naming to docker.io/library/app-worker                                                                                       0.5s
+[+] Running 7/7
+ ✔ Container app-redis-1               Running                                                                                      0.0s 
+ ✔ Container worker                    Started                                                                                     23.3s 
+ ✔ Container yarn_back                 Running                                                                                      0.0s 
+ ✔ Container frontend                  Running                                                                                      0.0s 
+ ✔ Container pattern_generator         Running                                                                                      0.0s 
+ ✔ Container 180e4f2e7923_knit_django  Recreated                                                                                   17.3s 
+ ✔ Container knit_django               Started                                                                                      3.4s 
+root@debian-test:/app# docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                      PORTS     NAMES
+2e3fbdb20ca9   app-worker              "celery -A celery_ap…"   34 seconds ago   Exited (2) 10 seconds ago             worker
+31132b68e227   app-knit_django         "gunicorn --bind 0.0…"   34 seconds ago   Up 14 seconds                         knit_django
+43ccdf44b3e5   redis:7.0.5-alpine      "docker-entrypoint.s…"   15 minutes ago   Up 9 minutes                          app-redis-1
+da322c37cfe9   app-yarn_back           "java -jar -Djava.ne…"   3 hours ago      Up 3 hours                            yarn_back
+d4560c2a62e3   app-frontend            "docker-entrypoint.s…"   6 hours ago      Up 6 hours                            frontend
+ded2014a7097   app-pattern_generator   "gunicorn --bind 0.0…"   11 days ago      Up 6 hours                            pattern_generator
+root@debian-test:/app# dockert start 2e3fbdb20ca9 -i
+bash: dockert: команда не найдена
+root@debian-test:/app# docker start 2e3fbdb20ca9 -i
+Usage: celery [OPTIONS] COMMAND [ARGS]...
+Try 'celery --help' for help.
+
+Error: Invalid value for '-A' / '--app': 
+Unable to load celery application.
+'settings' object has no attribute 'celery_broker_url'
+root@debian-test:/app# cd knit_django/
+root@debian-test:/app/knit_django# git pull
+подсказка: Pulling without specifying how to reconcile divergent branches is
+подсказка: discouraged. You can squelch this message by running one of the following
+подсказка: commands sometime before your next pull:
+подсказка: 
+подсказка:   git config pull.rebase false  # merge (the default strategy)
+подсказка:   git config pull.rebase true   # rebase
+подсказка:   git config pull.ff only       # fast-forward only
+подсказка: 
+подсказка: You can replace "git config" with "git config --global" to set a default
+подсказка: preference for all repositories. You can also pass --rebase, --no-rebase,
+подсказка: or --ff-only on the command line to override the configured default per
+подсказка: invocation.
+remote: Enumerating objects: 9, done.
+remote: Counting objects: 100% (9/9), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 5 (delta 4), reused 5 (delta 4), pack-reused 0
+Распаковка объектов: 100% (5/5), 510 bytes | 11.00 KiB/s, готово.
+Из https://github.com/Barebore/knit_django
+   77d8d09..bebe65c  main       -> origin/main
+Обновление 77d8d09..bebe65c
+error: Ваши локальные изменения в указанных файлах будут перезаписаны при слиянии:
+        celery_app.py
+Сделайте коммит или спрячьте ваши изменения перед слиянием веток.
+Прерываю
+root@debian-test:/app/knit_django# ls
+celery_app.py  Dockerfile       __init__.py  knowledge_library  media     pattern_lib  README.md         socks   upload_image
+db.sqlite3     information.txt  knit2        manage.py          odin_ass  pixelation   requirements.txt  static
+root@debian-test:/app/knit_django# ls
+celery_app.py  Dockerfile       __init__.py  knowledge_library  media     pattern_lib  README.md         socks   upload_image
+db.sqlite3     information.txt  knit2        manage.py          odin_ass  pixelation   requirements.txt  static
+root@debian-test:/app/knit_django# rm -rf celery_app.py 
+root@debian-test:/app/knit_django# git pull
+подсказка: Pulling without specifying how to reconcile divergent branches is
+подсказка: discouraged. You can squelch this message by running one of the following
+подсказка: commands sometime before your next pull:
+подсказка: 
+подсказка:   git config pull.rebase false  # merge (the default strategy)
+подсказка:   git config pull.rebase true   # rebase
+подсказка:   git config pull.ff only       # fast-forward only
+подсказка: 
+подсказка: You can replace "git config" with "git config --global" to set a default
+подсказка: preference for all repositories. You can also pass --rebase, --no-rebase,
+подсказка: or --ff-only on the command line to override the configured default per
+подсказка: invocation.
+Обновление 77d8d09..bebe65c
+Fast-forward
+ celery_app.py     | 11 ++++++-----
+ knit2/settings.py |  4 +++-
+ 2 files changed, 9 insertions(+), 6 deletions(-)
+root@debian-test:/app/knit_django# cd ..
+root@debian-test:/app# docker compose up --build -d
+[+] Building 33.0s (46/49)                                                                                                               
+ => [frontend internal] load build definition from Dockerfile                                                                       0.9s
+ => => transferring dockerfile: 402B                                                                                                0.1s
+ => [frontend internal] load .dockerignore                                                                                          1.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [worker internal] load build definition from Dockerfile                                                                         1.5s
+ => => transferring dockerfile: 247B                                                                                                0.1s
+ => [worker internal] load .dockerignore                                                                                            2.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [knit_django internal] load .dockerignore                                                                                       2.5s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [yarn_back internal] load .dockerignore                                                                                         2.1s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [knit_django internal] load build definition from Dockerfile                                                                    1.8s
+ => => transferring dockerfile: 247B                                                                                                0.1s
+ => [yarn_back internal] load build definition from Dockerfile                                                                      1.9s
+ => => transferring dockerfile: 257B                                                                                                0.1s
+ => [pattern_generator internal] load build definition from Dockerfile                                                              2.3s
+ => => transferring dockerfile: 280B                                                                                                0.1s
+ => [pattern_generator internal] load .dockerignore                                                                                 1.2s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [frontend internal] load metadata for docker.io/library/node:18                                                                 2.2s
+ => [frontend auth] library/node:pull token for registry-1.docker.io                                                                0.0s
+ => [worker internal] load metadata for docker.io/library/python:3.9                                                                3.0s
+ => [worker auth] library/python:pull token for registry-1.docker.io                                                                0.0s
+ => [yarn_back internal] load metadata for docker.io/library/openjdk:17-jdk-slim-buster                                             0.0s
+ => [yarn_back 1/3] FROM docker.io/library/openjdk:17-jdk-slim-buster                                                               0.0s
+ => [yarn_back internal] load build context                                                                                         0.4s
+ => => transferring context: 267B                                                                                                   0.1s
+ => [pattern_generator internal] load metadata for docker.io/library/python:3.6                                                     3.1s
+ => CACHED [yarn_back 2/3] COPY YarnApp-0.0.1-SNAPSHOT.jar /app/yarn_back.jar                                                       0.0s
+ => CACHED [yarn_back 3/3] COPY /resources/ /app/resources                                                                          0.0s
+ => [yarn_back] exporting to image                                                                                                  0.2s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:282c8dd295d3aa4696208dca878216c589eec5da151aa7c640e5ccdbd7e2ff8a                                        0.1s
+ => => naming to docker.io/library/app-yarn_back                                                                                    0.1s
+ => [frontend 1/4] FROM docker.io/library/node:18@sha256:19892542dd80e33aec50a51619ab36db0921de240c6a4ff6024d801f84881293           2.5s
+ => => resolve docker.io/library/node:18@sha256:19892542dd80e33aec50a51619ab36db0921de240c6a4ff6024d801f84881293                    2.5s
+ => [frontend internal] load build context                                                                                          2.4s
+ => => transferring context: 80.41kB                                                                                                1.5s
+ => [knit_django 1/6] FROM docker.io/library/python:3.9@sha256:98f018a1afd67f2e17a4abd5bfe09b998734ba7c1ee54780e7ed216f8b8095c3     0.0s
+ => [worker internal] load build context                                                                                            3.0s
+ => => transferring context: 518.68kB                                                                                               2.3s
+ => [knit_django internal] load build context                                                                                       3.4s
+ => => transferring context: 518.68kB                                                                                               2.7s
+ => [pattern_generator 1/7] FROM docker.io/library/python:3.6@sha256:f8652afaf88c25f0d22354d547d892591067aa4026a7fa9a6819df9f300af  0.0s
+ => [pattern_generator internal] load build context                                                                                 1.1s
+ => => transferring context: 9.36kB                                                                                                 0.7s
+ => CACHED [pattern_generator 2/7] WORKDIR /app                                                                                     0.0s
+ => CACHED [pattern_generator 3/7] RUN pip install gunicorn==20.1.0                                                                 0.0s
+ => CACHED [pattern_generator 4/7] COPY requirements.txt .                                                                          0.0s
+ => CACHED [pattern_generator 5/7] RUN pip install -r requirements.txt --no-cache-dir                                               0.0s
+ => CACHED [pattern_generator 6/7] COPY . .                                                                                         0.0s
+ => CACHED [pattern_generator 7/7] WORKDIR /app/pattern_api                                                                         0.0s
+ => [pattern_generator] exporting to image                                                                                          0.2s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:bf05a54dc3519160b19d9233c523494f5aa3e165cc8391b05a0c449ada604f1a                                        0.1s
+ => => naming to docker.io/library/app-pattern_generator                                                                            0.1s
+ => CACHED [worker 2/6] WORKDIR /app                                                                                                0.0s
+ => CACHED [worker 3/6] RUN pip install gunicorn==20.1.0                                                                            0.0s
+ => CACHED [worker 4/6] COPY requirements.txt .                                                                                     0.0s
+ => CACHED [worker 5/6] RUN pip install -r requirements.txt --no-cache-dir                                                          0.0s
+ => [worker 6/6] COPY . .                                                                                                          13.5s
+ => CACHED [frontend 2/4] WORKDIR /app                                                                                              0.0s
+ => CACHED [frontend 3/4] COPY ./YarnZone ./                                                                                        0.0s
+ => CACHED [frontend 4/4] RUN yarn install && yarn build                                                                            0.0s
+ => [frontend] exporting to image                                                                                                   0.3s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:2f7d3da2ded19cb7c4eaa1b31e4dc212cf72f832b3f1a11579365f552ca2540d                                        0.2s
+ => => naming to docker.io/library/app-frontend                                                                                     0.1s
+ => [knit_django] exporting to image                                                                                                7.4s
+ => => exporting layers                                                                                                             6.9s
+ => => writing image sha256:1ac30b0095678b446e931b0eaac5550088a3589aed0b9bdb7ba778c37c027c32                                        0.2s
+ => => naming to docker.io/library/app-knit_django                                                                                  0.3s
+ => [worker] exporting to image                                                                                                     7.5s
+ => => exporting layers                                                                                                             6.8s
+ => => writing image sha256:15d62697ccbbfc52105e3a3e8f4f81099217bdd4b3d0d401589965cfc13f1de6                                        0.1s
+ => => naming to docker.io/library/app-worker                                                                                       0.4s
+[+] Running 6/6
+ ✔ Container frontend           Running                                                                                             0.0s 
+ ✔ Container pattern_generator  Running                                                                                             0.0s 
+ ✔ Container knit_django        Started                                                                                             6.5s 
+ ✔ Container app-redis-1        Running                                                                                             0.0s 
+ ✔ Container worker             Started                                                                                             8.5s 
+ ✔ Container yarn_back          Running                                                                                             0.0s 
+root@debian-test:/app# docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS          PORTS     NAMES
+52b5bffe2704   app-knit_django         "gunicorn --bind 0.0…"   13 seconds ago   Up 6 seconds              knit_django
+c6f486d068ca   app-worker              "celery -A celery_ap…"   13 seconds ago   Up 4 seconds              worker
+43ccdf44b3e5   redis:7.0.5-alpine      "docker-entrypoint.s…"   22 minutes ago   Up 16 minutes             app-redis-1
+da322c37cfe9   app-yarn_back           "java -jar -Djava.ne…"   3 hours ago      Up 3 hours                yarn_back
+d4560c2a62e3   app-frontend            "docker-entrypoint.s…"   6 hours ago      Up 6 hours                frontend
+ded2014a7097   app-pattern_generator   "gunicorn --bind 0.0…"   11 days ago      Up 6 hours                pattern_generator
+root@debian-test:/app# df -h
+Файловая система Размер Использовано  Дост Использовано% Cмонтировано в
+udev               427M            0  427M            0% /dev
+tmpfs               91M         1,7M   89M            2% /run
+/dev/sda1          124G          34G   84G           29% /
+tmpfs              451M         1,1M  450M            1% /dev/shm
+tmpfs              5,0M            0  5,0M            0% /run/lock
+tmpfs               91M          68K   90M            1% /run/user/116
+overlay            124G          34G   84G           29% /var/lib/docker/overlay2/70668f05a00213f621de4d4dc5a714f94543ed3f90676c6a4219adfa5db51487/merged
+overlay            124G          34G   84G           29% /var/lib/docker/overlay2/9bc0431335ee0bdc77e23cc5c98bf88aadd5b6515a33b15666a3e31c0eaacb2e/merged
+tmpfs               91M          56K   90M            1% /run/user/1000
+overlay            124G          34G   84G           29% /var/lib/docker/overlay2/c482b767d349bd156aea2e822f4c83854d872d2dade5f7c51472dd004dcf8222/merged
+overlay            124G          34G   84G           29% /var/lib/docker/overlay2/55cec1cc2d770a389d72c1108caf717954c9519c68eaeff522c00d7e2cb21c48/merged
+overlay            124G          34G   84G           29% /var/lib/docker/overlay2/6815f1f46aa08475d3ffa9e94317f85f6b193a00c7f32cf7454356323080ac70/merged
+overlay            124G          34G   84G           29% /var/lib/docker/overlay2/696b07ad0226ff1f1f03bea27378d26522c29f2e37fc4e9585a2b148284aa8f0/merged
+root@debian-test:/app# зцв
+bash: зцв: команда не найдена
+root@debian-test:/app# pwd
+/app
+root@debian-test:/app# ls
+back  docker-compose.yml  frontend  gateway  knit_django  pattern_generator
+root@debian-test:/app# nano docker-compose.yml 
+root@debian-test:/app# ls
+back  docker-compose.yml  frontend  gateway  knit_django  pattern_generator
+root@debian-test:/app# touch .env
+root@debian-test:/app# ls
+back  docker-compose.yml  frontend  gateway  knit_django  pattern_generator
+root@debian-test:/app# ls -a
+.  ..  back  docker-compose.yml  .env  frontend  gateway  knit_django  pattern_generator
+root@debian-test:/app# nano .env
+root@debian-test:/app# docker compose up --build -d
+service "db" refers to undefined volume media: invalid compose project
+root@debian-test:/app# nano docker-compose.yml 
+root@debian-test:/app# docker compose up --build -d
+[+] Running 14/14
+ ✔ db 13 layers [⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                             30.9s 
+   ✔ 5b5fe70539cd Pull complete                                                                                                    10.4s 
+   ✔ 254f758dbb83 Pull complete                                                                                                    10.9s 
+   ✔ a50b6f601ef0 Pull complete                                                                                                    11.9s 
+   ✔ b2a96a17b000 Pull complete                                                                                                    12.5s 
+   ✔ b08a8624844f Pull complete                                                                                                    13.6s 
+   ✔ 9fb1f8c3deef Pull complete                                                                                                    14.1s 
+   ✔ fb374f351a53 Pull complete                                                                                                    14.5s 
+   ✔ 7b3d9f705bf0 Pull complete                                                                                                    14.9s 
+   ✔ a85d8c4f987c Pull complete                                                                                                    21.9s 
+   ✔ 0543b0f5d286 Pull complete                                                                                                    22.4s 
+   ✔ 28bb5ab88d7a Pull complete                                                                                                    22.8s 
+   ✔ fdb6f3d907fc Pull complete                                                                                                    23.2s 
+   ✔ f06aa6280d55 Pull complete                                                                                                    23.6s 
+[+] Building 18.4s (46/49)                                                                                                               
+ => [yarn_back internal] load .dockerignore                                                                                         1.2s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [frontend internal] load build definition from Dockerfile                                                                       1.5s
+ => => transferring dockerfile: 402B                                                                                                0.3s
+ => [yarn_back internal] load build definition from Dockerfile                                                                      2.9s
+ => => transferring dockerfile: 257B                                                                                                0.3s
+ => [knit_django internal] load .dockerignore                                                                                       2.1s
+ => => transferring context: 2B                                                                                                     0.1s
+ => [frontend internal] load .dockerignore                                                                                          2.5s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [pattern_generator internal] load .dockerignore                                                                                 5.2s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [knit_django internal] load build definition from Dockerfile                                                                    4.7s
+ => => transferring dockerfile: 247B                                                                                                0.2s
+ => [worker internal] load .dockerignore                                                                                            6.2s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [worker internal] load build definition from Dockerfile                                                                         4.0s
+ => => transferring dockerfile: 247B                                                                                                0.4s
+ => [pattern_generator internal] load build definition from Dockerfile                                                              5.6s
+ => => transferring dockerfile: 280B                                                                                                0.1s
+ => [yarn_back internal] load metadata for docker.io/library/openjdk:17-jdk-slim-buster                                             0.0s
+ => [frontend internal] load metadata for docker.io/library/node:18                                                                 6.4s
+ => [yarn_back 1/3] FROM docker.io/library/openjdk:17-jdk-slim-buster                                                               0.0s
+ => [yarn_back internal] load build context                                                                                         0.6s
+ => => transferring context: 267B                                                                                                   0.3s
+ => [knit_django internal] load metadata for docker.io/library/python:3.9                                                           4.7s
+ => [pattern_generator internal] load metadata for docker.io/library/python:3.6                                                     5.0s
+ => CACHED [yarn_back 2/3] COPY YarnApp-0.0.1-SNAPSHOT.jar /app/yarn_back.jar                                                       0.0s
+ => CACHED [yarn_back 3/3] COPY /resources/ /app/resources                                                                          0.0s
+ => [yarn_back] exporting to image                                                                                                  0.3s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:282c8dd295d3aa4696208dca878216c589eec5da151aa7c640e5ccdbd7e2ff8a                                        0.2s
+ => => naming to docker.io/library/app-yarn_back                                                                                    0.2s
+ => [frontend auth] library/node:pull token for registry-1.docker.io                                                                0.0s
+ => [knit_django auth] library/python:pull token for registry-1.docker.io                                                           0.0s
+ => [frontend 1/4] FROM docker.io/library/node:18@sha256:19892542dd80e33aec50a51619ab36db0921de240c6a4ff6024d801f84881293           1.6s
+ => => resolve docker.io/library/node:18@sha256:19892542dd80e33aec50a51619ab36db0921de240c6a4ff6024d801f84881293                    1.6s
+ => [frontend internal] load build context                                                                                          2.2s
+ => => transferring context: 80.41kB                                                                                                1.0s
+ => [knit_django 1/6] FROM docker.io/library/python:3.9@sha256:98f018a1afd67f2e17a4abd5bfe09b998734ba7c1ee54780e7ed216f8b8095c3     0.0s
+ => [worker internal] load build context                                                                                            3.5s
+ => => transferring context: 185.03kB                                                                                               2.6s
+ => [knit_django internal] load build context                                                                                       2.9s
+ => => transferring context: 185.03kB                                                                                               1.9s
+ => [pattern_generator 1/7] FROM docker.io/library/python:3.6@sha256:f8652afaf88c25f0d22354d547d892591067aa4026a7fa9a6819df9f300af  0.0s
+ => [pattern_generator internal] load build context                                                                                 1.4s
+ => => transferring context: 9.36kB                                                                                                 0.8s
+ => CACHED [pattern_generator 2/7] WORKDIR /app                                                                                     0.0s
+ => CACHED [pattern_generator 3/7] RUN pip install gunicorn==20.1.0                                                                 0.0s
+ => CACHED [pattern_generator 4/7] COPY requirements.txt .                                                                          0.0s
+ => CACHED [pattern_generator 5/7] RUN pip install -r requirements.txt --no-cache-dir                                               0.0s
+ => CACHED [pattern_generator 6/7] COPY . .                                                                                         0.0s
+ => CACHED [pattern_generator 7/7] WORKDIR /app/pattern_api                                                                         0.0s
+ => [pattern_generator] exporting to image                                                                                          0.2s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:bf05a54dc3519160b19d9233c523494f5aa3e165cc8391b05a0c449ada604f1a                                        0.1s
+ => => naming to docker.io/library/app-pattern_generator                                                                            0.1s
+ => CACHED [knit_django 2/6] WORKDIR /app                                                                                           0.0s
+ => CACHED [knit_django 3/6] RUN pip install gunicorn==20.1.0                                                                       0.0s
+ => CACHED [knit_django 4/6] COPY requirements.txt .                                                                                0.0s
+ => CACHED [knit_django 5/6] RUN pip install -r requirements.txt --no-cache-dir                                                     0.0s
+ => CACHED [knit_django 6/6] COPY . .                                                                                               0.0s
+ => [knit_django] exporting to image                                                                                                0.3s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:1ac30b0095678b446e931b0eaac5550088a3589aed0b9bdb7ba778c37c027c32                                        0.1s
+ => => naming to docker.io/library/app-knit_django                                                                                  0.2s
+ => [worker] exporting to image                                                                                                     0.5s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:15d62697ccbbfc52105e3a3e8f4f81099217bdd4b3d0d401589965cfc13f1de6                                        0.2s
+ => => naming to docker.io/library/app-worker                                                                                       0.3s
+ => CACHED [frontend 2/4] WORKDIR /app                                                                                              0.0s
+ => CACHED [frontend 3/4] COPY ./YarnZone ./                                                                                        0.0s
+ => CACHED [frontend 4/4] RUN yarn install && yarn build                                                                            0.0s
+ => [frontend] exporting to image                                                                                                   0.5s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:2f7d3da2ded19cb7c4eaa1b31e4dc212cf72f832b3f1a11579365f552ca2540d                                        0.3s
+ => => naming to docker.io/library/app-frontend                                                                                     0.3s
+[+] Running 9/9
+ ✔ Volume "app_static"          Created                                                                                             0.2s 
+ ✔ Volume "app_media"           Created                                                                                             0.1s 
+ ✔ Container app-db-1           Started                                                                                            14.5s 
+ ✔ Container knit_django        Running                                                                                             0.0s 
+ ✔ Container app-redis-1        Running                                                                                             0.0s 
+ ✔ Container worker             Running                                                                                             0.0s 
+ ✔ Container yarn_back          Running                                                                                             0.0s 
+ ✔ Container frontend           Started                                                                                             9.1s 
+ ✔ Container pattern_generator  Running                                                                                             0.0s 
+root@debian-test:/app# ls
+back  docker-compose.yml  frontend  gateway  knit_django  pattern_generator
+root@debian-test:/app# cat docker-compose.yml 
+version: '3'
+
+volumes:
+  profile_vol:
+  static_images:
+  pg_data:
+  media:
+  static:
+  service:
+
+services:
+  yarn_back:
+    build: ./back/
+    container_name: yarn_back
+    network_mode: "host"
+    volumes:
+      - profile_vol:/app/profile
+      - static_images:/app/static/images
+  frontend:
+    build: ./frontend/
+    network_mode: "host"
+    container_name: frontend
+
+  db:
+    image: postgres:15
+    env_file: .env
+    volumes:
+      - static:/backend_static/
+      - media:/app/media/
+
+  pattern_generator:
+    build: ./pattern_generator/
+    network_mode: "host"
+    container_name: pattern_generator
+
+  knit_django:
+    build: ./knit_django/
+    network_mode: "host"
+    container_name: knit_django
+    volumes:
+      - service:/service/
+
+  redis:
+    image: redis:7.0.5-alpine
+    hostname: redis
+    network_mode: "host"
+
+  worker:
+    build: ./knit_django/
+    hostname: worker
+    container_name: worker
+    entrypoint: celery
+    command: -A celery_app.app worker --loglevel=warning
+    volumes:
+      - service:/service/
+    links:
+      - redis
+    depends_on:
+      - redis
+
+  #gateway:
+  #   build: ./gateway/
+  #   ports:
+  #     - 8000:80
+root@debian-test:/app# 
+root@debian-test:/app# docker compose up
+[+] Building 0.0s (0/0)                                                                                                                  
+[+] Running 7/0
+ ✔ Container pattern_generator  Running                                                                                             0.0s 
+ ✔ Container knit_django        Running                                                                                             0.0s 
+ ✔ Container app-redis-1        Running                                                                                             0.0s 
+ ✔ Container worker             Running                                                                                             0.0s 
+ ✔ Container yarn_back          Running                                                                                             0.0s 
+ ✔ Container frontend           Running                                                                                             0.0s 
+ ✔ Container app-db-1           Running                                                                                             0.0s 
+Attaching to app-db-1, app-redis-1, frontend, knit_django, pattern_generator, worker, yarn_back
+worker             | [2023-06-30 17:19:16,672: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error -2 connecting to redis:6379. Name or service not known..
+worker             | Trying again in 32.00 seconds... (16/100)
+worker             | 
+worker             | [2023-06-30 17:19:48,863: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error -2 connecting to redis:6379. Name or service not known..
+worker             | Trying again in 32.00 seconds... (16/100)
+worker             | 
+worker             | [2023-06-30 17:20:21,021: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error -2 connecting to redis:6379. Name or service not known..
+worker             | Trying again in 32.00 seconds... (16/100)
+worker             | 
+worker             | [2023-06-30 17:20:53,167: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error -2 connecting to redis:6379. Name or service not known..
+worker             | Trying again in 32.00 seconds... (16/100)
+worker             | 
+worker             | [2023-06-30 17:21:25,302: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error -2 connecting to redis:6379. Name or service not known..
+worker             | Trying again in 32.00 seconds... (16/100)
+worker             | 
+^CGracefully stopping... (press Ctrl+C again to force)
+Aborting on container exit...
+[+] Stopping 0/6
+ ⠸ Container worker             Stopping                                                                                            7.9s 
+ ⠸ Container yarn_back          Stopping                                                                                            7.9s 
+ ⠸ Container frontend           Stopping                                                                                            7.9s 
+ ⠸ Container app-db-1           Stopping                                                                                            7.9s 
+ ⠸ Container pattern_generator  Stopping                                                                                            7.9s 
+ ⠸ Container knit_django        Stopping                                                                                            7.9s 
+[+] Killing 4/7
+[+] Stopping 7/7tern_generator  Killing                                                                                            10.1s 
+ ✔ Container worker             Stopped                                                                                            18.1s 
+ ✔ Container yarn_back          Stopped                                                                                            16.7s 
+ ✔ Container frontend           Stopped                                                                                            18.9s 
+ ✔ Container app-db-1           Stopped                                                                                            17.9s 
+ ✔ Container pattern_generator  Stopped                                                                                            18.9s 
+ ✔ Container knit_django        Stopped                                                                                            18.3s 
+ ✔ Container app-redis-1        Stopped                                                                                             0.0s 
+canceled
+root@debian-test:/app# docker compose up --build -d
+[+] Building 12.4s (44/47)                                                                                                               
+ => [yarn_back internal] load build definition from Dockerfile                                                                      1.2s
+ => => transferring dockerfile: 257B                                                                                                0.1s
+ => [yarn_back internal] load .dockerignore                                                                                         1.0s
+ => => transferring context: 2B                                                                                                     0.1s
+ => [frontend internal] load .dockerignore                                                                                          1.9s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [frontend internal] load build definition from Dockerfile                                                                       1.8s
+ => => transferring dockerfile: 402B                                                                                                0.1s
+ => [pattern_generator internal] load build definition from Dockerfile                                                              2.0s
+ => => transferring dockerfile: 280B                                                                                                0.1s
+ => [pattern_generator internal] load .dockerignore                                                                                 1.2s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [worker internal] load build definition from Dockerfile                                                                         2.1s
+ => => transferring dockerfile: 247B                                                                                                0.4s
+ => [worker internal] load .dockerignore                                                                                            2.6s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [knit_django internal] load .dockerignore                                                                                       2.4s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [knit_django internal] load build definition from Dockerfile                                                                    2.9s
+ => => transferring dockerfile: 247B                                                                                                0.1s
+ => [yarn_back internal] load metadata for docker.io/library/openjdk:17-jdk-slim-buster                                             0.0s
+ => [yarn_back 1/3] FROM docker.io/library/openjdk:17-jdk-slim-buster                                                               0.0s
+ => [yarn_back internal] load build context                                                                                         0.9s
+ => => transferring context: 267B                                                                                                   0.1s
+ => [pattern_generator internal] load metadata for docker.io/library/python:3.6                                                     3.3s
+ => [frontend internal] load metadata for docker.io/library/node:18                                                                 3.1s
+ => [worker internal] load metadata for docker.io/library/python:3.9                                                                2.9s
+ => CACHED [yarn_back 2/3] COPY YarnApp-0.0.1-SNAPSHOT.jar /app/yarn_back.jar                                                       0.0s
+ => CACHED [yarn_back 3/3] COPY /resources/ /app/resources                                                                          0.0s
+ => [yarn_back] exporting to image                                                                                                  0.1s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:282c8dd295d3aa4696208dca878216c589eec5da151aa7c640e5ccdbd7e2ff8a                                        0.1s
+ => => naming to docker.io/library/app-yarn_back                                                                                    0.1s
+ => [frontend 1/4] FROM docker.io/library/node:18@sha256:19892542dd80e33aec50a51619ab36db0921de240c6a4ff6024d801f84881293           1.1s
+ => => resolve docker.io/library/node:18@sha256:19892542dd80e33aec50a51619ab36db0921de240c6a4ff6024d801f84881293                    1.1s
+ => [frontend internal] load build context                                                                                          1.3s
+ => => transferring context: 80.41kB                                                                                                1.0s
+ => [pattern_generator 1/7] FROM docker.io/library/python:3.6@sha256:f8652afaf88c25f0d22354d547d892591067aa4026a7fa9a6819df9f300af  0.0s
+ => [pattern_generator internal] load build context                                                                                 1.3s
+ => => transferring context: 9.36kB                                                                                                 0.7s
+ => [worker 1/6] FROM docker.io/library/python:3.9@sha256:98f018a1afd67f2e17a4abd5bfe09b998734ba7c1ee54780e7ed216f8b8095c3          0.0s
+ => [knit_django internal] load build context                                                                                       3.1s
+ => => transferring context: 185.03kB                                                                                               2.4s
+ => [worker internal] load build context                                                                                            3.0s
+ => => transferring context: 185.03kB                                                                                               2.3s
+ => CACHED [pattern_generator 2/7] WORKDIR /app                                                                                     0.0s
+ => CACHED [pattern_generator 3/7] RUN pip install gunicorn==20.1.0                                                                 0.0s
+ => CACHED [pattern_generator 4/7] COPY requirements.txt .                                                                          0.0s
+ => CACHED [pattern_generator 5/7] RUN pip install -r requirements.txt --no-cache-dir                                               0.0s
+ => CACHED [pattern_generator 6/7] COPY . .                                                                                         0.0s
+ => CACHED [pattern_generator 7/7] WORKDIR /app/pattern_api                                                                         0.0s
+ => [pattern_generator] exporting to image                                                                                          0.1s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:bf05a54dc3519160b19d9233c523494f5aa3e165cc8391b05a0c449ada604f1a                                        0.1s
+ => => naming to docker.io/library/app-pattern_generator                                                                            0.1s
+ => CACHED [frontend 2/4] WORKDIR /app                                                                                              0.0s
+ => CACHED [frontend 3/4] COPY ./YarnZone ./                                                                                        0.0s
+ => CACHED [frontend 4/4] RUN yarn install && yarn build                                                                            0.0s
+ => [frontend] exporting to image                                                                                                   0.1s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:2f7d3da2ded19cb7c4eaa1b31e4dc212cf72f832b3f1a11579365f552ca2540d                                        0.1s
+ => => naming to docker.io/library/app-frontend                                                                                     0.1s
+ => [knit_django] exporting to image                                                                                                0.4s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:1ac30b0095678b446e931b0eaac5550088a3589aed0b9bdb7ba778c37c027c32                                        0.3s
+ => => naming to docker.io/library/app-knit_django                                                                                  0.1s
+ => CACHED [worker 2/6] WORKDIR /app                                                                                                0.0s
+ => CACHED [worker 3/6] RUN pip install gunicorn==20.1.0                                                                            0.0s
+ => CACHED [worker 4/6] COPY requirements.txt .                                                                                     0.0s
+ => CACHED [worker 5/6] RUN pip install -r requirements.txt --no-cache-dir                                                          0.0s
+ => CACHED [worker 6/6] COPY . .                                                                                                    0.0s
+ => [worker] exporting to image                                                                                                     0.4s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:15d62697ccbbfc52105e3a3e8f4f81099217bdd4b3d0d401589965cfc13f1de6                                        0.1s
+ => => naming to docker.io/library/app-worker                                                                                       0.3s
+[+] Running 7/7
+ ✔ Container app-redis-1        Started                                                                                             4.5s 
+ ✔ Container worker             Started                                                                                            12.7s 
+ ✔ Container yarn_back          Started                                                                                             3.9s 
+ ✔ Container frontend           Started                                                                                             4.4s 
+ ✔ Container app-db-1           Started                                                                                            13.1s 
+ ✔ Container pattern_generator  Started                                                                                             5.7s 
+ ✔ Container knit_django        Started                                                                                             3.6s 
+root@debian-test:/app# docker-compose run -rm web-app sh -c "python maange.py shell"
+bash: docker-compose: команда не найдена
+root@debian-test:/app# docker compose run -rm web-app sh -c "python maange.py shell"
+unknown shorthand flag: 'r' in -rm
+root@debian-test:/app# docker exec -it knit_django
+"docker exec" requires at least 2 arguments.
+See 'docker exec --help'.
+
+Usage:  docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+
+Execute a command in a running container
+root@debian-test:/app# docker exec -it knit_django /bin/bash
+root@debian-test:/app# ^C
+root@debian-test:/app# 
+root@debian-test:/app# docker exec -it knit_django bash
+bash: docker: command not found
+root@debian-test:/app# docker exec -it knit_django /bin/bash
+bash: docker: command not found
+root@debian-test:/app# docker exec -it knit_django /bin/bash
+bash: docker: command not found
+root@debian-test:/app# docker exec -it knit_django
+bash: docker: command not found
+root@debian-test:/app# docker ps -a
+bash: docker: command not found
+root@debian-test:/app# docker ps -a
+bash: docker: command not found
+root@debian-test:/app# cd ..
+root@debian-test:/# docker ps -a
+bash: docker: command not found
+root@debian-test:/# docker
+bash: docker: command not found
+root@debian-test:/# ls
+app  bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  service  srv  sys  tmp  usr  var
+root@debian-test:/# cd app/
+root@debian-test:/app# ls
+Dockerfile  __init__.py    db.sqlite3       knit2              manage.py  odin_ass     pixelation        socks   upload_image
+README.md   celery_app.py  information.txt  knowledge_library  media      pattern_lib  requirements.txt  static
+root@debian-test:/app# ls
+Dockerfile  __init__.py    db.sqlite3       knit2              manage.py  odin_ass     pixelation        socks   upload_image
+README.md   celery_app.py  information.txt  knowledge_library  media      pattern_lib  requirements.txt  static
+root@debian-test:/app# ls
+Dockerfile  __init__.py    db.sqlite3       knit2              manage.py  odin_ass     pixelation        socks   upload_image
+README.md   celery_app.py  information.txt  knowledge_library  media      pattern_lib  requirements.txt  static
+root@debian-test:/app# cd ..
+root@debian-test:/# cd ..
+root@debian-test:/# cd ..
+root@debian-test:/# pwd
+/
+root@debian-test:/# ls
+app  bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  service  srv  sys  tmp  usr  var
+root@debian-test:/# cd app/
+root@debian-test:/app# ls
+Dockerfile  __init__.py    db.sqlite3       knit2              manage.py  odin_ass     pixelation        socks   upload_image
+README.md   celery_app.py  information.txt  knowledge_library  media      pattern_lib  requirements.txt  static
+root@debian-test:/app# docker version
+bash: docker: command not found
+root@debian-test:/app# 
